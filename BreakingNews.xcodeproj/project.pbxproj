@@ -10,6 +10,8 @@
 		05E3F1773502BF3578265154 /* Pods_BreakingNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BB25CBEF7177A0FFF6990 /* Pods_BreakingNews.framework */; };
 		72B0CEF7C828E89F0420375A /* Pods_BreakingNewsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A97383FE372FA8778B54C5CC /* Pods_BreakingNewsTests.framework */; };
 		8D20E713A36EFEF05F24EE13 /* Pods_BreakingNews_BreakingNewsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877A5E3E8383F670A8BB38 /* Pods_BreakingNews_BreakingNewsUITests.framework */; };
+		993321FC277566D800896952 /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993321FB277566D800896952 /* BottomButton.swift */; };
+		993321FF27756A1700896952 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993321FE27756A1700896952 /* UIColor+Ext.swift */; };
 		9984B3C627753D1200EE0888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984B3C527753D1200EE0888 /* AppDelegate.swift */; };
 		9984B3C827753D1200EE0888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984B3C727753D1200EE0888 /* SceneDelegate.swift */; };
 		9984B3CF27753D1500EE0888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9984B3CE27753D1500EE0888 /* Assets.xcassets */; };
@@ -51,6 +53,8 @@
 		77D186B313FB135D3C0DC3DE /* Pods-BreakingNewsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingNewsTests.release.xcconfig"; path = "Target Support Files/Pods-BreakingNewsTests/Pods-BreakingNewsTests.release.xcconfig"; sourceTree = "<group>"; };
 		8513E3848D53E3A15C964F53 /* Pods-BreakingNews-BreakingNewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingNews-BreakingNewsUITests.debug.xcconfig"; path = "Target Support Files/Pods-BreakingNews-BreakingNewsUITests/Pods-BreakingNews-BreakingNewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		95432E0151E34AC0DB07C475 /* Pods-BreakingNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingNews.release.xcconfig"; path = "Target Support Files/Pods-BreakingNews/Pods-BreakingNews.release.xcconfig"; sourceTree = "<group>"; };
+		993321FB277566D800896952 /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
+		993321FE27756A1700896952 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		9984B3C227753D1200EE0888 /* BreakingNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreakingNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9984B3C527753D1200EE0888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9984B3C727753D1200EE0888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +132,22 @@
 				77D186B313FB135D3C0DC3DE /* Pods-BreakingNewsTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		993321FA277566A300896952 /* BottomButton */ = {
+			isa = PBXGroup;
+			children = (
+				993321FB277566D800896952 /* BottomButton.swift */,
+			);
+			path = BottomButton;
+			sourceTree = "<group>";
+		};
+		993321FD277569F700896952 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				993321FE27756A1700896952 /* UIColor+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9984B3B927753D1200EE0888 = {
@@ -237,6 +257,7 @@
 		99B8496C2775419F00D43BB0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				993321FD277569F700896952 /* Extensions */,
 				99B849922775572300D43BB0 /* CustomUI */,
 			);
 			path = Helpers;
@@ -323,6 +344,7 @@
 		99B849922775572300D43BB0 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				993321FA277566A300896952 /* BottomButton */,
 				99B849932775573800D43BB0 /* CustomDropDown */,
 			);
 			path = CustomUI;
@@ -580,8 +602,10 @@
 				99B849842775464000D43BB0 /* HomeViewModel.swift in Sources */,
 				99B849782775453800D43BB0 /* OnBoardingViewController.swift in Sources */,
 				99B8498D277547FF00D43BB0 /* DetailsViewModel.swift in Sources */,
+				993321FF27756A1700896952 /* UIColor+Ext.swift in Sources */,
 				9984B3C627753D1200EE0888 /* AppDelegate.swift in Sources */,
 				99B8498A277547E500D43BB0 /* DetailsViewController.swift in Sources */,
+				993321FC277566D800896952 /* BottomButton.swift in Sources */,
 				99B849952775574C00D43BB0 /* CustomDropDown.swift in Sources */,
 				9984B3C827753D1200EE0888 /* SceneDelegate.swift in Sources */,
 				99B8497B2775455B00D43BB0 /* OnBoardingViewModel.swift in Sources */,
