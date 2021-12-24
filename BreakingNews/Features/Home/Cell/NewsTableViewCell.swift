@@ -14,5 +14,8 @@ class NewsTableViewCell: UITableViewCell {
     
     func configureCell(imageURL: String?, title: String?) {
         newsTitle.text = title
+        if let imageURL = imageURL {
+            newsImage.setImageWith(url: imageURL)
+        }
     }
 }
