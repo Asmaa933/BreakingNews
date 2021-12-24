@@ -19,6 +19,9 @@
 		99B849812775462800D43BB0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B8497F2775462800D43BB0 /* HomeViewController.swift */; };
 		99B849822775462800D43BB0 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B849802775462800D43BB0 /* HomeViewController.xib */; };
 		99B849842775464000D43BB0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B849832775464000D43BB0 /* HomeViewModel.swift */; };
+		99B8498A277547E500D43BB0 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B84988277547E500D43BB0 /* DetailsViewController.swift */; };
+		99B8498B277547E500D43BB0 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B84989277547E500D43BB0 /* DetailsViewController.xib */; };
+		99B8498D277547FF00D43BB0 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B8498C277547FF00D43BB0 /* DetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,9 @@
 		99B8497F2775462800D43BB0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		99B849802775462800D43BB0 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		99B849832775464000D43BB0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		99B84988277547E500D43BB0 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		99B84989277547E500D43BB0 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
+		99B8498C277547FF00D43BB0 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +187,7 @@
 			children = (
 				99B84973277544FD00D43BB0 /* OnBoarding */,
 				99B8497C277545ED00D43BB0 /* Home */,
+				99B849852775466C00D43BB0 /* Details */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -240,6 +247,32 @@
 			isa = PBXGroup;
 			children = (
 				99B849832775464000D43BB0 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		99B849852775466C00D43BB0 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				99B84986277547BF00D43BB0 /* View */,
+				99B84987277547C400D43BB0 /* ViewModel */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		99B84986277547BF00D43BB0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99B84988277547E500D43BB0 /* DetailsViewController.swift */,
+				99B84989277547E500D43BB0 /* DetailsViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		99B84987277547C400D43BB0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				99B8498C277547FF00D43BB0 /* DetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -349,6 +382,7 @@
 			files = (
 				99B849792775453800D43BB0 /* OnBoardingViewController.xib in Resources */,
 				9984B3D227753D1500EE0888 /* LaunchScreen.storyboard in Resources */,
+				99B8498B277547E500D43BB0 /* DetailsViewController.xib in Resources */,
 				9984B3CF27753D1500EE0888 /* Assets.xcassets in Resources */,
 				99B849822775462800D43BB0 /* HomeViewController.xib in Resources */,
 			);
@@ -378,7 +412,9 @@
 				99B849812775462800D43BB0 /* HomeViewController.swift in Sources */,
 				99B849842775464000D43BB0 /* HomeViewModel.swift in Sources */,
 				99B849782775453800D43BB0 /* OnBoardingViewController.swift in Sources */,
+				99B8498D277547FF00D43BB0 /* DetailsViewModel.swift in Sources */,
 				9984B3C627753D1200EE0888 /* AppDelegate.swift in Sources */,
+				99B8498A277547E500D43BB0 /* DetailsViewController.swift in Sources */,
 				9984B3C827753D1200EE0888 /* SceneDelegate.swift in Sources */,
 				99B8497B2775455B00D43BB0 /* OnBoardingViewModel.swift in Sources */,
 			);
