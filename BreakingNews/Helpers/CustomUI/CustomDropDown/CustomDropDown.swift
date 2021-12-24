@@ -9,10 +9,10 @@ import UIKit
 import DropDown
 
 class CustomDropDown: UITextField {
-    
+
     var didSelectItem: ((Int) -> Void)? // index
     private let dropMenu = DropDown()
-    
+
     public var dropMenuItems: [String]? {
         get {
             return dropMenu.dataSource
@@ -21,7 +21,7 @@ class CustomDropDown: UITextField {
             dropMenu.dataSource = newValue ?? []
         }
     }
-    
+
     override func awakeFromNib() {
         superview?.awakeFromNib()
         setupDropDown()
@@ -29,7 +29,7 @@ class CustomDropDown: UITextField {
 }
 
 fileprivate extension CustomDropDown {
-    
+
     func setupDropDown() {
         dropMenu.bottomOffset = CGPoint(x: 0, y: (self.bounds.height))
         dropMenu.direction = .any
@@ -39,7 +39,7 @@ fileprivate extension CustomDropDown {
             self.handleItemSelection(at: index)
         }
     }
-    
+
     func handleItemSelection(at index: Int) {
         didSelectItem?(index)
     }
