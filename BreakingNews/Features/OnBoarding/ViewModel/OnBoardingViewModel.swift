@@ -15,6 +15,22 @@ protocol OnBoardingViewModelProtocol {
     func startHeadlines()
 }
 
-class OnBoardingViewModel {
+class OnBoardingViewModel: OnBoardingViewModelProtocol {
     
+    private var categories = NewsCategory.allCases
+    private var countries = NewsCountry.allCases
+    var selectedCategoryIndex: Int?
+    var selectedCountryIndex: Int?
+    
+    func getCategories() -> [String] {
+        categories.map { $0.rawValue.capitalized }
+    }
+    
+    func getCountries() -> [String] {
+        countries.map { $0.rawValue }
+    }
+    
+    func startHeadlines() {
+        
+    }
 }
