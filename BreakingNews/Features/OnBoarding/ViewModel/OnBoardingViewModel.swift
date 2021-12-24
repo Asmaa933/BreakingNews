@@ -11,6 +11,7 @@ protocol OnBoardingViewModelProtocol {
     var statePresenter: StatePresentable? { get set }
     var selectedCategoryIndex: Int? { get set}
     var selectedCountryIndex: Int? { get set}
+    var userFavorite: UserFavorite? { get }
     func getCategories() -> [String]
     func getCountries() -> [String]
     func startHeadlines()
@@ -20,6 +21,7 @@ class OnBoardingViewModel: OnBoardingViewModelProtocol {
     
     private var categories = NewsCategory.allCases
     private var countries = NewsCountry.allCases
+    private(set) var userFavorite: UserFavorite?
     var statePresenter: StatePresentable?
     var selectedCategoryIndex: Int?
     var selectedCountryIndex: Int?
@@ -43,6 +45,7 @@ class OnBoardingViewModel: OnBoardingViewModelProtocol {
         let userFavorite = UserFavorite(countryISO: countries[selectedCountryIndex].isoCode,
                                         category: categories[selectedCategoryIndex].rawValue)
         UserDefaultsManager.saveUserFavorite(userFavorite)
+        self.userFavorite = userFavorite
         statePresenter?.render(state: .populated)
     }
 }
