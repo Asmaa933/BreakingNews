@@ -9,8 +9,19 @@ import UIKit
 
 class OnBoardingViewController: UIViewController {
 
+    //MARK: - Outlets
+    @IBOutlet private weak var countryDropDown: CustomDropDown!
+    @IBOutlet private weak var categoriesDropDown: CustomDropDown!
+    
+    //MARK: - View LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .cyan
+    }
+    
+    //MARK: - Actions
+
+    @IBAction private func startAction(_ sender: BottomButton) {
     }
 }
+

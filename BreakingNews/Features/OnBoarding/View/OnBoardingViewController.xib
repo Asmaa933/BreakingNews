@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnBoardingViewController" customModule="BreakingNews" customModuleProvider="target">
             <connections>
+                <outlet property="categoriesDropDown" destination="gxb-j9-0Up" id="CdO-Q4-wo2"/>
+                <outlet property="countryDropDown" destination="ksW-9W-pfO" id="46t-5p-RGj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -51,6 +53,9 @@
                     <state key="normal" title="Start">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <connections>
+                        <action selector="startAction:" destination="-1" eventType="touchUpInside" id="P5r-x1-Cco"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
