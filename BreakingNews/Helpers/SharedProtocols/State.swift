@@ -19,11 +19,11 @@ enum EmptyState {
 }
 
 protocol EmptyPresentable {
-    func setEmptyView(state: EmptyState)
+    func setEmptyView()
 }
 
 extension EmptyPresentable {
-    func setEmptyView(state: EmptyState) {}
+    func setEmptyView() {}
 }
 
 protocol ErrorPresentable {

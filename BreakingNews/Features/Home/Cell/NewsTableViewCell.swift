@@ -13,6 +13,6 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet private weak var newsTitle: UILabel!
     
     func configureCell(imageURL: String?, title: String?) {
-        
+        newsTitle.text = title
     }
 }
