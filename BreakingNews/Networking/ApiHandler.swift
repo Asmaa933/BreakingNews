@@ -20,6 +20,10 @@ protocol ApiHandlerProtocol {
 
 class ApiHandler: ApiHandlerProtocol {
     
+    static let shared = ApiHandler()
+    
+    private init() { }
+    
     func fetchData<T: Decodable>(request: Requestable, mappingClass: T.Type, completion: NetworkResponse<T>?) {
         getRequestData(request: request).validate(statusCode: 200...300).responseJSON { [weak self] response in
             guard let self = self else { return }
@@ -55,13 +59,13 @@ private extension ApiHandler {
             do {
                 let decodedObj = try JSONDecoder().decode(T.self, from: jsonResponse)
                 return .success(decodedObj)
-            } catch let error {
-                debugPrint("Error in decoding ** \n \(error.localizedDescription.description)")
+            } catch (let error) {
+                debugPrint("Error in decoding ** \n \(error.localizedDescription)")
                 return .failure(NetworkError.generalError)
             }
 
         case .failure(let error):
-            debugPrint(error.localizedDescription.description)
+            debugPrint(error.localizedDescription)
             return .failure(error)
         }
     }
