@@ -9,10 +9,10 @@ import UIKit
 import DropDown
 
 class CustomDropDown: UITextField {
-
+    
     var didSelectItem: ((Int) -> Void)? // index
     private let dropMenu = DropDown()
-
+    
     public var dropMenuItems: [String]? {
         get {
             return dropMenu.dataSource
@@ -21,7 +21,7 @@ class CustomDropDown: UITextField {
             dropMenu.dataSource = newValue ?? []
         }
     }
-
+    
     override func awakeFromNib() {
         superview?.awakeFromNib()
         setupDropDown()
@@ -29,18 +29,24 @@ class CustomDropDown: UITextField {
 }
 
 fileprivate extension CustomDropDown {
-
+    
     func setupDropDown() {
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dropMenuTapped)))
         dropMenu.bottomOffset = CGPoint(x: 0, y: (self.bounds.height))
         dropMenu.direction = .any
         dropMenu.anchorView = self.plainView
-        dropMenu.selectionAction = {[weak self] (index: Int, _: String) in
+        dropMenu.selectionAction = {[weak self] (index: Int, item: String) in
             guard let self = self else { return }
+            self.text = item
             self.handleItemSelection(at: index)
         }
     }
-
+    
     func handleItemSelection(at index: Int) {
         didSelectItem?(index)
+    }
+    
+    @objc func dropMenuTapped() {
+        dropMenu.show()
     }
 }

@@ -11,19 +11,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        setRootViewController(viewController: OnBoardingViewController())
+        checkIfHasFavorites()
     }
 }
 
 fileprivate extension SceneDelegate {
-    func setRootViewController(viewController: UIViewController) {
+    
+    func checkIfHasFavorites() {
+        if let _ = UserDefaultsManager.getUserFavorite() {
+            setRootViewController(to: HomeViewController())
+        } else {
+            let onboardingViewModel = OnBoardingViewModel()
+            let onBoardingViewController = OnBoardingViewController(viewModel: onboardingViewModel)
+            setRootViewController(to: onBoardingViewController)
+        }
+    }
+    
+    func setRootViewController(to viewController: UIViewController) {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.isHidden = true
         window?.rootViewController = navigationController
