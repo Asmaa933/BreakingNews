@@ -16,6 +16,9 @@
 		99B849782775453800D43BB0 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B849762775453800D43BB0 /* OnBoardingViewController.swift */; };
 		99B849792775453800D43BB0 /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B849772775453800D43BB0 /* OnBoardingViewController.xib */; };
 		99B8497B2775455B00D43BB0 /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B8497A2775455B00D43BB0 /* OnBoardingViewModel.swift */; };
+		99B849812775462800D43BB0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B8497F2775462800D43BB0 /* HomeViewController.swift */; };
+		99B849822775462800D43BB0 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B849802775462800D43BB0 /* HomeViewController.xib */; };
+		99B849842775464000D43BB0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B849832775464000D43BB0 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		99B849762775453800D43BB0 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		99B849772775453800D43BB0 /* OnBoardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardingViewController.xib; sourceTree = "<group>"; };
 		99B8497A2775455B00D43BB0 /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
+		99B8497F2775462800D43BB0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		99B849802775462800D43BB0 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		99B849832775464000D43BB0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				99B84973277544FD00D43BB0 /* OnBoarding */,
+				99B8497C277545ED00D43BB0 /* Home */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -207,6 +214,32 @@
 			isa = PBXGroup;
 			children = (
 				99B8497A2775455B00D43BB0 /* OnBoardingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		99B8497C277545ED00D43BB0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				99B8497D277545FA00D43BB0 /* View */,
+				99B8497E2775460100D43BB0 /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		99B8497D277545FA00D43BB0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99B8497F2775462800D43BB0 /* HomeViewController.swift */,
+				99B849802775462800D43BB0 /* HomeViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		99B8497E2775460100D43BB0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				99B849832775464000D43BB0 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -317,6 +350,7 @@
 				99B849792775453800D43BB0 /* OnBoardingViewController.xib in Resources */,
 				9984B3D227753D1500EE0888 /* LaunchScreen.storyboard in Resources */,
 				9984B3CF27753D1500EE0888 /* Assets.xcassets in Resources */,
+				99B849822775462800D43BB0 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +375,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99B849812775462800D43BB0 /* HomeViewController.swift in Sources */,
+				99B849842775464000D43BB0 /* HomeViewModel.swift in Sources */,
 				99B849782775453800D43BB0 /* OnBoardingViewController.swift in Sources */,
 				9984B3C627753D1200EE0888 /* AppDelegate.swift in Sources */,
 				9984B3C827753D1200EE0888 /* SceneDelegate.swift in Sources */,
