@@ -12,6 +12,7 @@ protocol HomeViewModelProtocol {
     func fetchArticles()
     func getArticlesCount() -> Int
     func getArticle(at index: Int) -> Article
+    func loadMoreArticles()
 }
 
 class HomeViewModel: HomeViewModelProtocol {
@@ -31,7 +32,12 @@ class HomeViewModel: HomeViewModelProtocol {
     }
     
     func fetchArticles() {
-        loadData()
+        pageNumber = 1
+        loadData(isLoadMore: false)
+    }
+    
+    func loadMoreArticles() {
+        loadData(isLoadMore: true)
     }
     
     func getArticlesCount() -> Int {
@@ -48,9 +54,13 @@ class HomeViewModel: HomeViewModelProtocol {
 
 private extension HomeViewModel {
     
-    func loadData(searchText: String? = nil) {
+    func loadData(searchText: String? = nil, isLoadMore: Bool) {
         guard hasMoreItems else { return }
-        statePresenter?.render(state: .loading)
+        if isLoadMore {
+            statePresenter?.render(state: .loadingMore)
+        } else {
+            statePresenter?.render(state: .loading)
+        }
         let requestParameters = HeadlineArticleParameters(country: userFavorite.countryISO,
                                                           category: userFavorite.category,
                                                           page: pageNumber,
@@ -64,9 +74,8 @@ private extension HomeViewModel {
     func handleDataLoading(result: ArticleResult) {
         switch result {
         case .success(let value):
-            checkHasMoreItems(articlesCount: value.articles?.count ?? 0,
-                              totalResultCount: value.totalResults ?? 0)
             setData(items: value.articles ?? [])
+            checkHasMoreItems(totalResultCount: value.totalResults ?? 0)
         case .failure(let error):
             statePresenter?.render(state: .error(error.localizedDescription))
         }
@@ -77,8 +86,8 @@ private extension HomeViewModel {
         statePresenter?.render(state: .populated)
     }
     
-    func checkHasMoreItems(articlesCount: Int, totalResultCount: Int) {
-        if articlesCount < totalResultCount {
+    func checkHasMoreItems(totalResultCount: Int) {
+        if articles.count < totalResultCount {
             pageNumber += 1
         } else {
             hasMoreItems = false

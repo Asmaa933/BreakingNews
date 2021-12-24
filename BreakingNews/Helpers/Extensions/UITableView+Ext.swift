@@ -51,4 +51,26 @@ extension UITableView {
     func restore() {
         self.backgroundView = nil
     }
+    
+    func showActivityIndicatorInFooter() -> UIActivityIndicatorView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: 40))
+        let loadingIndicator = UIActivityIndicatorView(style: .large)
+        loadingIndicator.color = #colorLiteral(red: 0.9764705882, green: 0.4941176471, blue: 0.03921568627, alpha: 1)
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.center = footerView.center
+        loadingIndicator.startAnimating()
+        footerView.clipsToBounds = true
+        footerView.addSubview(loadingIndicator)
+        tableFooterView = footerView
+        return loadingIndicator
+    }
+    
+    func removeActivityIndicatorFromFooter(_ loadingIndicator: UIActivityIndicatorView?) {
+        if loadingIndicator != nil {
+            loadingIndicator?.stopAnimating()
+            loadingIndicator?.removeFromSuperview()
+            self.tableFooterView = nil
+            self.tableFooterView?.isHidden = true
+        }
+    }
 }

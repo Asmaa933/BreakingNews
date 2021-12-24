@@ -21,7 +21,7 @@ struct HeadlineArticleParameters: Codable {
         case query = "q"
     }
     
-    internal init(country: String, category: String, page: Int, query: String? = nil, pageSize: Int? = 50) {
+    internal init(country: String, category: String, page: Int, query: String? = nil, pageSize: Int? = 20) {
         self.country = country
         self.category = category
         self.query = query

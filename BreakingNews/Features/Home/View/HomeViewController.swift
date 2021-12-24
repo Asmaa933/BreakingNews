@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     @IBOutlet private weak var newsTableView: UITableView!
     
     private var viewModel: HomeViewModelProtocol
+    private var footerActivityIndicator: UIActivityIndicatorView?
     
     init(viewModel: HomeViewModelProtocol) {
         self.viewModel = viewModel
@@ -48,14 +49,23 @@ fileprivate extension HomeViewController {
     }
     
     func reloadData() {
+        removeIndicators()
         newsTableView.isHidden = false
         newsTableView.reloadData()
         newsTableView.restore()
     }
+    
+    func removeIndicators() {
+        newsTableView.removeActivityIndicatorFromFooter(footerActivityIndicator)
+    }
 }
 
 extension HomeViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.getArticlesCount() - 1 {
+            viewModel.loadMoreArticles()
+        }
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -75,17 +85,22 @@ extension HomeViewController: StatePresentable {
     func render(state: State) {
         switch state {
         case .loading:
-            break // show loader
+            break
+        case .loadingMore:
+            footerActivityIndicator = newsTableView.showActivityIndicatorInFooter()
         case .error(let error):
+            removeIndicators()
             show(errorMessage: error)
         case .empty:
             setEmptyView()
         case .populated:
-            reloadData() // dismiss loader
+            reloadData()
         }
     }
     
     func setEmptyView() {
+        removeIndicators()
         newsTableView.setEmptyView(title: "No result found")
     }
 }
+

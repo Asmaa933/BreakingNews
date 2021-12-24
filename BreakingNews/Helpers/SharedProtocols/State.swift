@@ -9,6 +9,7 @@ import UIKit
 
 enum State {
     case loading
+    case loadingMore
     case error(String)
     case empty
     case populated
