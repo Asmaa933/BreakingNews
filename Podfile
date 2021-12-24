@@ -7,6 +7,7 @@ target 'BreakingNews' do
 
   # Pods for BreakingNews
   pod 'DropDown'
+  pod 'Alamofire'
 
   target 'BreakingNewsTests' do
     inherit! :search_paths
