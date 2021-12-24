@@ -15,6 +15,8 @@
 		993322022775CFB400896952 /* OnBoardingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993322012775CFB400896952 /* OnBoardingConstants.swift */; };
 		9933220A2775E3ED00896952 /* UserFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993322092775E3ED00896952 /* UserFavorite.swift */; };
 		9933220F2775EB7D00896952 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9933220E2775EB7D00896952 /* UserDefaultsManager.swift */; };
+		993322132775EC2E00896952 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993322122775EC2E00896952 /* State.swift */; };
+		993322152775F2CC00896952 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993322142775F2CC00896952 /* UIViewController+Ext.swift */; };
 		9984B3C627753D1200EE0888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984B3C527753D1200EE0888 /* AppDelegate.swift */; };
 		9984B3C827753D1200EE0888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984B3C727753D1200EE0888 /* SceneDelegate.swift */; };
 		9984B3CF27753D1500EE0888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9984B3CE27753D1500EE0888 /* Assets.xcassets */; };
@@ -61,6 +63,8 @@
 		993322012775CFB400896952 /* OnBoardingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingConstants.swift; sourceTree = "<group>"; };
 		993322092775E3ED00896952 /* UserFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavorite.swift; sourceTree = "<group>"; };
 		9933220E2775EB7D00896952 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		993322122775EC2E00896952 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		993322142775F2CC00896952 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		9984B3C227753D1200EE0888 /* BreakingNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreakingNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9984B3C527753D1200EE0888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9984B3C727753D1200EE0888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				993321FE27756A1700896952 /* UIColor+Ext.swift */,
+				993322142775F2CC00896952 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -178,6 +183,14 @@
 				9933220E2775EB7D00896952 /* UserDefaultsManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		993322112775EC2200896952 /* SharedProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				993322122775EC2E00896952 /* State.swift */,
+			);
+			path = SharedProtocols;
 			sourceTree = "<group>";
 		};
 		9984B3B927753D1200EE0888 = {
@@ -287,6 +300,7 @@
 		99B8496C2775419F00D43BB0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				993322112775EC2200896952 /* SharedProtocols */,
 				993322062775E34800896952 /* Managers */,
 				993321FD277569F700896952 /* Extensions */,
 				99B849922775572300D43BB0 /* CustomUI */,
@@ -639,11 +653,13 @@
 				9933220A2775E3ED00896952 /* UserFavorite.swift in Sources */,
 				9984B3C627753D1200EE0888 /* AppDelegate.swift in Sources */,
 				99B8498A277547E500D43BB0 /* DetailsViewController.swift in Sources */,
+				993322132775EC2E00896952 /* State.swift in Sources */,
 				993321FC277566D800896952 /* BottomButton.swift in Sources */,
 				993322022775CFB400896952 /* OnBoardingConstants.swift in Sources */,
 				9933220F2775EB7D00896952 /* UserDefaultsManager.swift in Sources */,
 				99B849952775574C00D43BB0 /* CustomDropDown.swift in Sources */,
 				9984B3C827753D1200EE0888 /* SceneDelegate.swift in Sources */,
+				993322152775F2CC00896952 /* UIViewController+Ext.swift in Sources */,
 				99B8497B2775455B00D43BB0 /* OnBoardingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

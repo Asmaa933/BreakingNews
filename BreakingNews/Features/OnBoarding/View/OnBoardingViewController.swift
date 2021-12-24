@@ -29,6 +29,7 @@ class OnBoardingViewController: UIViewController {
     //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.statePresenter = self
         setupView()
     }
     
@@ -57,6 +58,24 @@ fileprivate extension OnBoardingViewController {
         categoriesDropDown.didSelectItem = {[weak self] index in
             guard let self = self else { return }
             self.viewModel.selectedCategoryIndex  = index
+        }
+    }
+    
+    func navigateToHome() {
+        setRootViewController(to: HomeViewController())
+    }
+}
+
+extension OnBoardingViewController: StatePresentable {
+    
+    func render(state: State) {
+        switch state {
+        case .error(let message):
+            show(errorMessage: message)
+        case .populated:
+            navigateToHome()
+        default:
+            break
         }
     }
 }
