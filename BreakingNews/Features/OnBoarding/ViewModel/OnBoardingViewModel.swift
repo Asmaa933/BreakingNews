@@ -7,6 +7,14 @@
 
 import Foundation
 
+protocol OnBoardingViewModelProtocol {
+    var selectedCategoryIndex: Int? { get set}
+    var selectedCountryIndex: Int? { get set}
+    func getCategories() -> [String]
+    func getCountries() -> [String]
+    func startHeadlines()
+}
+
 class OnBoardingViewModel {
     
 }
