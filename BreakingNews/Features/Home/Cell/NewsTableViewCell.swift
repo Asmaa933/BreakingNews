@@ -12,7 +12,7 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet private weak var newsImage: UIImageView!
     @IBOutlet private weak var newsTitle: UILabel!
     
-    func configureCell(imageURL: String, title: String) {
+    func configureCell(imageURL: String?, title: String?) {
         
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 struct HeadlineArticleParameters: Codable {
     
-    let apiKey: String
+    let apiKey: String = NetworkConstants.apiKey
     let country: String
     let category: String
     let page: Int
@@ -21,8 +21,7 @@ struct HeadlineArticleParameters: Codable {
         case query = "q"
     }
     
-    internal init(apiKey: String, country: String, category: String, page: Int, query: String? = nil, pageSize: Int? = 50) {
-        self.apiKey = apiKey
+    internal init(country: String, category: String, page: Int, query: String? = nil, pageSize: Int? = 50) {
         self.country = country
         self.category = category
         self.query = query
