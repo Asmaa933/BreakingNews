@@ -8,7 +8,7 @@
 import UIKit
 
 class OnBoardingViewController: UIViewController {
-
+    
     //MARK: - Outlets
     @IBOutlet private weak var countriesDropDown: CustomDropDown!
     @IBOutlet private weak var categoriesDropDown: CustomDropDown!
@@ -29,11 +29,34 @@ class OnBoardingViewController: UIViewController {
     //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupView()
     }
     
     //MARK: - Actions
     @IBAction private func startAction(_ sender: BottomButton) {
-        
+        viewModel.startHeadlines()
+    }
+}
+
+fileprivate extension OnBoardingViewController {
+    func setupView(){
+        setupCountriesDropDown()
+        setupCategoriesDropDown()
+    }
+    
+    func setupCountriesDropDown() {
+        countriesDropDown.dropMenuItems = viewModel.getCountries()
+        countriesDropDown.didSelectItem = {[weak self] index in
+            guard let self = self else { return }
+            self.viewModel.selectedCountryIndex  = index
+        }
+    }
+    
+    func setupCategoriesDropDown() {
+        categoriesDropDown.dropMenuItems = viewModel.getCategories()
+        categoriesDropDown.didSelectItem = {[weak self] index in
+            guard let self = self else { return }
+            self.viewModel.selectedCategoryIndex  = index
+        }
     }
 }
