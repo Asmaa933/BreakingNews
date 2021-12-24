@@ -8,6 +8,7 @@
 import Foundation
 
 protocol OnBoardingViewModelProtocol {
+    var statePresenter: StatePresentable? { get set }
     var selectedCategoryIndex: Int? { get set}
     var selectedCountryIndex: Int? { get set}
     func getCategories() -> [String]
@@ -19,8 +20,10 @@ class OnBoardingViewModel: OnBoardingViewModelProtocol {
     
     private var categories = NewsCategory.allCases
     private var countries = NewsCountry.allCases
+    var statePresenter: StatePresentable?
     var selectedCategoryIndex: Int?
     var selectedCountryIndex: Int?
+    
     
     func getCategories() -> [String] {
         categories.map { $0.rawValue.capitalized }
@@ -31,6 +34,17 @@ class OnBoardingViewModel: OnBoardingViewModelProtocol {
     }
     
     func startHeadlines() {
+        guard let selectedCountryIndex = selectedCountryIndex,
+              let selectedCategoryIndex = selectedCategoryIndex else {
+                  statePresenter?.render(state: .error("Please select all fields"))
+                  return
+              }
         
+        let userFavorite = UserFavorite(countryISO: countries[selectedCountryIndex].isoCode,
+                                        category: categories[selectedCategoryIndex].rawValue)
+        UserDefaultsManager.saveUserFavorite(userFavorite)
+        statePresenter?.render(state: .populated)
     }
 }
+
+
