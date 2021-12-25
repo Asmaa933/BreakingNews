@@ -10,7 +10,7 @@ import UIKit
 enum State {
     case loading
     case loadingMore
-    case error(String)
+    case error(Error)
     case empty
     case populated
 }
@@ -28,12 +28,13 @@ extension EmptyPresentable {
 }
 
 protocol ErrorPresentable {
-    func show(errorMessage: String)
+    func show(errorMessage: Error)
 }
 
 extension ErrorPresentable where Self: UIViewController {
-    func show(errorMessage: String) {
-        let alert = UIAlertController(title: "", message: errorMessage, preferredStyle: .alert)
+    func show(errorMessage: Error) {
+        let message = (errorMessage as? ErrorHandler)?.message ?? errorMessage.localizedDescription
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)

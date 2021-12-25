@@ -48,6 +48,8 @@
 		99C9EDD6277679E000C96A31 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDD5277679E000C96A31 /* UIImageView+Ext.swift */; };
 		99C9EDD82776812700C96A31 /* LoadingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDD72776812700C96A31 /* LoadingProtocol.swift */; };
 		99C9EDDA277691FD00C96A31 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDD9277691FD00C96A31 /* CustomSearchBar.swift */; };
+		99C9EDDC2776A05400C96A31 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDDB2776A05400C96A31 /* Errors.swift */; };
+		99C9EDDF2776A54400C96A31 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDDE2776A54400C96A31 /* ErrorHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,8 @@
 		99C9EDD5277679E000C96A31 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		99C9EDD72776812700C96A31 /* LoadingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingProtocol.swift; sourceTree = "<group>"; };
 		99C9EDD9277691FD00C96A31 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		99C9EDDB2776A05400C96A31 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		99C9EDDE2776A54400C96A31 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		9C93357962E5DB6DCAE84C46 /* Pods-BreakingNews-BreakingNewsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingNews-BreakingNewsUITests.release.xcconfig"; path = "Target Support Files/Pods-BreakingNews-BreakingNewsUITests/Pods-BreakingNews-BreakingNewsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A36BB25CBEF7177A0FFF6990 /* Pods_BreakingNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakingNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97383FE372FA8778B54C5CC /* Pods_BreakingNewsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakingNewsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -352,6 +356,7 @@
 		99B8496C2775419F00D43BB0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				99C9EDDD2776A53600C96A31 /* Constants */,
 				993322112775EC2200896952 /* SharedProtocols */,
 				993322062775E34800896952 /* Managers */,
 				993321FD277569F700896952 /* Extensions */,
@@ -469,6 +474,7 @@
 				99BDE29B2776194F000140B3 /* Requestable.swift */,
 				99BDE29D2776199D000140B3 /* ApiHandler.swift */,
 				99C9EDC227761EBF00C96A31 /* NetworkConstants.swift */,
+				99C9EDDB2776A05400C96A31 /* Errors.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -512,6 +518,14 @@
 				99C9EDD32776317500C96A31 /* ArticleResponse.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		99C9EDDD2776A53600C96A31 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				99C9EDDE2776A54400C96A31 /* ErrorHandler.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -776,12 +790,14 @@
 				993321FC277566D800896952 /* BottomButton.swift in Sources */,
 				99C9EDD82776812700C96A31 /* LoadingProtocol.swift in Sources */,
 				993322022775CFB400896952 /* OnBoardingConstants.swift in Sources */,
+				99C9EDDF2776A54400C96A31 /* ErrorHandler.swift in Sources */,
 				9933220F2775EB7D00896952 /* UserDefaultsManager.swift in Sources */,
 				99C9EDD6277679E000C96A31 /* UIImageView+Ext.swift in Sources */,
 				99B849952775574C00D43BB0 /* CustomDropDown.swift in Sources */,
 				9984B3C827753D1200EE0888 /* SceneDelegate.swift in Sources */,
 				993322152775F2CC00896952 /* UIViewController+Ext.swift in Sources */,
 				99C9EDCE277621A300C96A31 /* HeadlineArticleParameters.swift in Sources */,
+				99C9EDDC2776A05400C96A31 /* Errors.swift in Sources */,
 				998854082775FC2500D493D2 /* ShadowCorneredView.swift in Sources */,
 				99B8497B2775455B00D43BB0 /* OnBoardingViewModel.swift in Sources */,
 				99C9EDC327761EBF00C96A31 /* NetworkConstants.swift in Sources */,

@@ -10,10 +10,6 @@ import Alamofire
 
 typealias NetworkResponse<T> = (Result<T, Error>) -> Void
 
-enum NetworkError: String, Error {
-    case generalError = "Something went wrong, please try again"
-}
-
 protocol ApiHandlerProtocol {
     func fetchData<T: Decodable>(request: Requestable, mappingClass: T.Type, completion: NetworkResponse<T>?)
 }
@@ -51,22 +47,27 @@ private extension ApiHandler {
     }
 
     func handleResponse<T: Decodable> (response: AFDataResponse<Any>, mappingClass: T.Type) -> Result<T, Error> {
+        guard let jsonResponse = response.data else {
+            return .failure(ErrorHandler.generalError)
+        }
         switch response.result {
         case .success:
-            guard let jsonResponse = response.data else {
-                return .failure(NetworkError.generalError)
-            }
             do {
                 let decodedObj = try JSONDecoder().decode(T.self, from: jsonResponse)
                 return .success(decodedObj)
             } catch (let error) {
                 debugPrint("Error in decoding ** \n \(error.localizedDescription)")
-                return .failure(NetworkError.generalError)
+                return .failure(ErrorHandler.generalError)
             }
 
         case .failure(let error):
             debugPrint(error.localizedDescription)
-            return .failure(error)
+            do {
+                let errorModel = try JSONDecoder().decode(ErrorModel.self, from: jsonResponse)
+                return .failure(ErrorHandler.custom(errorModel.message ?? ""))
+            } catch {
+                return .failure(error)
+            }
         }
     }
 }

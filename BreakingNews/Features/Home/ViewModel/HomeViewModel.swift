@@ -110,7 +110,7 @@ private extension HomeViewModel {
             setData(items: value.articles ?? [])
             checkHasMoreItems(totalResultCount: value.totalResults ?? 0)
         case .failure(let error):
-            statePresenter?.render(state: .error(error.localizedDescription))
+            statePresenter?.render(state: .error(error))
         }
     }
     

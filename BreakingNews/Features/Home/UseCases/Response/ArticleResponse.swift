@@ -16,7 +16,6 @@ struct ArticleResponse: Codable {
 
 // MARK: - Article
 struct Article: Codable {
-  //  let source: Source?
     let author: String?
     let title: String?
     let articleDescription: String?
@@ -31,9 +30,3 @@ struct Article: Codable {
         case url, urlToImage, publishedAt, content
     }
 }
-
-//// MARK: - Source
-//struct Source: Codable {
-//    let id: String?
-//    let name: String?
-//}

@@ -38,7 +38,7 @@ class OnBoardingViewModel: OnBoardingViewModelProtocol {
     func startHeadlines() {
         guard let selectedCountryIndex = selectedCountryIndex,
               let selectedCategoryIndex = selectedCategoryIndex else {
-                  statePresenter?.render(state: .error("Please select all fields"))
+                  statePresenter?.render(state: .error(ErrorHandler.selectDropDown))
                   return
               }
         
