@@ -11,6 +11,7 @@ class HomeViewController: UIViewController {
     
     //MARK: - Outlets
     
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var searchBar: CustomSearchBar!
     @IBOutlet private weak var newsTableView: UITableView!
     
@@ -57,6 +58,7 @@ fileprivate extension HomeViewController {
     
     func removeIndicators() {
         newsTableView.removeActivityIndicatorFromFooter(footerActivityIndicator)
+        dismissLoading()
     }
     
     func setupSearchBar() {
@@ -64,6 +66,14 @@ fileprivate extension HomeViewController {
             guard let self = self else { return}
             self.viewModel.searchForArticle(by: text)
         }
+    }
+    
+    func showLoading() {
+        activityIndicator.startAnimating()
+    }
+    
+    func dismissLoading() {
+        activityIndicator.stopAnimating()
     }
 }
 
@@ -92,7 +102,7 @@ extension HomeViewController: StatePresentable {
     func render(state: State) {
         switch state {
         case .loading:
-            break
+            showLoading()
         case .loadingMore:
             footerActivityIndicator = newsTableView.showActivityIndicatorInFooter()
         case .error(let error):
