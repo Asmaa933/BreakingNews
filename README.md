@@ -49,3 +49,8 @@ Using enum is very pretty as I can set the cases and extend these cases with var
 </div>
 
 ## Video
+
+https://user-images.githubusercontent.com/44899782/147393972-22a62ecf-856b-4e3a-aa64-59bd173ef655.mov
+
+
+
