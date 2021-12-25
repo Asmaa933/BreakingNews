@@ -8,12 +8,14 @@
 import Foundation
 
 protocol DetailsViewModelProtocol {
-    
+    var article: Article { get }
+    var statePresenter: StatePresentable? { get set }
 }
 
 class DetailsViewModel: DetailsViewModelProtocol {
     
-    private var article: Article
+    var statePresenter: StatePresentable?
+    private(set) var article: Article
     
     init(article: Article) {
         self.article = article

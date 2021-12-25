@@ -13,8 +13,9 @@ class DetailsViewController: UIViewController {
     @IBOutlet private weak var authorLabel: UILabel!
     @IBOutlet private weak var sourceLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var articleImage: UIImageView!
     
-    private let viewModel: DetailsViewModelProtocol
+    private var viewModel: DetailsViewModelProtocol
     
     init(viewModel: DetailsViewModelProtocol) {
         self.viewModel = viewModel
@@ -27,13 +28,46 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewModel.statePresenter = self
+        setupView()
     }
     
     @IBAction private func backAction(_ sender: UIButton) {
-        
+        pop()
     }
     
     @IBAction private func openArticleAction(_ sender: BottomButton) {
+    }
+}
+
+fileprivate extension DetailsViewController {
+    func setupView() {
+        articleImage.layer.cornerRadius = 10
+        updateUI()
+    }
+    
+    func updateUI() {
+        let article = viewModel.article
+        titleLabel.text = article.title ?? "-"
+        authorLabel.text = article.author ?? "-"
+        sourceLabel.text = article.source?.name ?? "-"
+        descriptionLabel.text = article.articleDescription ?? "-"
+        if let imageURL = article.urlToImage {
+            articleImage.setImageWith(url: imageURL)
+        }
+    }
+    
+}
+
+extension DetailsViewController: StatePresentable {
+    func render(state: State) {
+        switch state {
+        case .error(let error):
+            show(error: error)
+        case .populated:
+            openSafariView()
+        default:
+            break
+        }
     }
 }
