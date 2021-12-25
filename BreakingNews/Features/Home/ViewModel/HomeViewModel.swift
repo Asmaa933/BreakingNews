@@ -31,7 +31,7 @@ class HomeViewModel: HomeViewModelProtocol {
     private var hasMoreItems: Bool = true
     private var pendingRequestWorkItem: DispatchWorkItem?
     private var currentState: HomeState = .notSearching
-
+    
     
     var statePresenter: StatePresentable?
     
@@ -42,7 +42,9 @@ class HomeViewModel: HomeViewModelProtocol {
     
     func fetchArticles() {
         pageNumber = 1
-        loadData(isLoadMore: false)
+        if !loadDataFromCaching() {
+            loadData(isLoadMore: false)
+        }
     }
     
     func loadMoreArticles() {
@@ -67,12 +69,14 @@ class HomeViewModel: HomeViewModelProtocol {
     }
     
     func searchForArticle(by text: String) {
-        pageNumber = 1
         hasMoreItems = true
         if text.isEmpty {
+            searchedArticles.removeAll()
             self.currentState = .notSearching
-            loadData(isLoadMore: false)
+            pageNumber = articles.count / 20 + 1
+            statePresenter?.render(state: .populated)
         } else {
+            pageNumber = 1
             pendingRequestWorkItem?.cancel()
             let requestWorkItem = DispatchWorkItem { [weak self] in
                 guard let self = self else { return }
@@ -86,7 +90,15 @@ class HomeViewModel: HomeViewModelProtocol {
     }
 }
 
-private extension HomeViewModel {
+fileprivate extension HomeViewModel {
+    
+    @discardableResult
+    func loadDataFromCaching() -> Bool {
+        articles = CachingManager.shared.loadArticles()
+        pageNumber = articles.count / 20 + 1
+        statePresenter?.render(state: .populated)
+        return !articles.isEmpty
+    }
     
     func loadData(searchText: String? = nil, isLoadMore: Bool) {
         guard hasMoreItems else { return }
@@ -94,7 +106,6 @@ private extension HomeViewModel {
             statePresenter?.render(state: .loadingMore)
         } else {
             statePresenter?.render(state: .loading)
-            articles.removeAll()
         }
         let requestParameters = HeadlineArticleParameters(country: userFavorite.countryISO,
                                                           category: userFavorite.category,
@@ -121,10 +132,14 @@ private extension HomeViewModel {
         switch currentState {
         case .searching:
             self.searchedArticles.append(contentsOf: items)
+            statePresenter?.render(state: .populated)
         case .notSearching:
-            self.articles.append(contentsOf: items)
+            guard !items.isEmpty else { return }
+            var newArticles = self.articles
+            newArticles.append(contentsOf: items)
+            CachingManager.shared.saveArticles(newArticles)
+            loadDataFromCaching()
         }
-        statePresenter?.render(state: .populated)
     }
     
     func checkHasMoreItems(totalResultCount: Int, isNewArrayNotEmpty: Bool) {
