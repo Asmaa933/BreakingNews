@@ -8,9 +8,9 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
@@ -21,8 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 fileprivate extension SceneDelegate {
     
     func checkIfHasFavorites() {
-        if let _ = UserDefaultsManager.getUserFavorite() {
-            setRootViewController(to: HomeViewController())
+        if let userFavorite = UserDefaultsManager.getUserFavorite() {
+            let homeViewModel = HomeViewModel(userFavorite: userFavorite, dataSource: HomeDataProvider())
+            let homeViewController = HomeViewController(viewModel: homeViewModel)
+            setRootViewController(to: homeViewController)
         } else {
             let onboardingViewModel = OnBoardingViewModel()
             let onBoardingViewController = OnBoardingViewController(viewModel: onboardingViewModel)

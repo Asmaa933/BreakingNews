@@ -62,7 +62,10 @@ fileprivate extension OnBoardingViewController {
     }
     
     func navigateToHome() {
-        setRootViewController(to: HomeViewController())
+        guard let userFavorite = viewModel.userFavorite else { return }
+        let homeViewModel = HomeViewModel(userFavorite: userFavorite, dataSource: HomeDataProvider())
+        let homeViewController = HomeViewController(viewModel: homeViewModel)
+        setRootViewController(to: homeViewController)
     }
 }
 
