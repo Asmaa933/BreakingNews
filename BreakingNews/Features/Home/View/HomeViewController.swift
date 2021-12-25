@@ -53,7 +53,6 @@ fileprivate extension HomeViewController {
         removeIndicators()
         newsTableView.isHidden = false
         newsTableView.reloadData()
-        newsTableView.restore()
     }
     
     func removeIndicators() {
@@ -97,17 +96,17 @@ extension HomeViewController: StatePresentable {
         case .loadingMore:
             footerActivityIndicator = newsTableView.showActivityIndicatorInFooter()
         case .error(let error):
-            removeIndicators()
+            reloadData()
             show(errorMessage: error)
         case .empty:
             setEmptyView()
         case .populated:
             reloadData()
+            newsTableView.restore()
         }
     }
     
     func setEmptyView() {
-        removeIndicators()
         newsTableView.setEmptyView(title: "No result found")
     }
 }
