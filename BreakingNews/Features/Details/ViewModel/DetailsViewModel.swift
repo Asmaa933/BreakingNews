@@ -7,6 +7,15 @@
 
 import Foundation
 
-class DetailsViewModel {
+protocol DetailsViewModelProtocol {
     
+}
+
+class DetailsViewModel: DetailsViewModelProtocol {
+    
+    private var article: Article
+    
+    init(article: Article) {
+        self.article = article
+    }
 }

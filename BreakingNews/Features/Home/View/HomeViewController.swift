@@ -69,10 +69,12 @@ fileprivate extension HomeViewController {
     }
     
     func showLoading() {
+        newsTableView.isUserInteractionEnabled = false
         activityIndicator.startAnimating()
     }
     
     func dismissLoading() {
+        newsTableView.isUserInteractionEnabled = true
         activityIndicator.stopAnimating()
     }
 }
@@ -82,6 +84,12 @@ extension HomeViewController: UITableViewDelegate {
         if indexPath.row == viewModel.getArticlesCount() - 1 {
             viewModel.loadMoreArticles()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailsViewModel = DetailsViewModel(article: viewModel.getArticle(at: indexPath.row))
+        let detailsViewController = DetailsViewController(viewModel: detailsViewModel)
+        push(viewController: detailsViewController)
     }
 }
 
