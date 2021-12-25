@@ -28,12 +28,12 @@ extension EmptyPresentable {
 }
 
 protocol ErrorPresentable {
-    func show(errorMessage: Error)
+    func show(error: Error)
 }
 
 extension ErrorPresentable where Self: UIViewController {
-    func show(errorMessage: Error) {
-        let message = (errorMessage as? ErrorHandler)?.message ?? errorMessage.localizedDescription
+    func show(error: Error) {
+        let message = (error as? ErrorHandler)?.message ?? error.localizedDescription
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(okAction)

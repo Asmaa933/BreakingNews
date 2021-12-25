@@ -74,7 +74,7 @@ extension OnBoardingViewController: StatePresentable {
     func render(state: State) {
         switch state {
         case .error(let message):
-            show(errorMessage: message)
+            show(error: message)
         case .populated:
             navigateToHome()
         default:

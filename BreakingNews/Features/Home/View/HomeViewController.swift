@@ -115,7 +115,7 @@ extension HomeViewController: StatePresentable {
             footerActivityIndicator = newsTableView.showActivityIndicatorInFooter()
         case .error(let error):
             reloadData()
-            show(errorMessage: error)
+            show(error: error)
         case .empty:
             setEmptyView()
         case .populated:
