@@ -2,11 +2,11 @@
 
 ## Use
 
-### Structure:-
+### **Structure**:-
 
-I used MVVM structure with use cases to cleanly separates the user interface from the application logic. By using this architecture it helped in
-- Independent of UI: The UI can change easily, without changing the rest of the system.
-- Independent of the database and network: I can easily change the them without breal business rules.
+I used MVVM structure with use cases to cleanly achieve separation of concern for the user interface from the application logic. By using this architecture it helped in
+- Independent of UI: The UI can change easily, without changing the rest of the system as we can substitute the table view with a collection view and we will not have to touch our logic
+- Independent of the database and network: I can easily change the them without break business rules.
 - Testable: The business rules can be tested without the UI, database, web server, or any other external element.
 
 #### Data Flow
@@ -15,18 +15,18 @@ I used MVVM structure with use cases to cleanly separates the user interface fro
 3. Use Case call network api and return the articles to viewModel.
 5. Information flows back to the View(UI) where we display the list of items.
 
-### Caching:- 
-1- I used **UserDefauls** to cache simple configuration(user favorites and date of last caching)
-2- I used **docouments directory** to cache articles and refresh it every 15 minutes:
+### **Caching**:- 
+1. I used **UserDefauls** to cache simple configuration(user favorites and date of last caching)
+2. I used **docouments directory** to cache articles and refresh it every 15 minutes:
 #### When thinking about persistence in iOS apps:
 The first choice might be Core Data but Core Data is best used when we have a lot of relationships between our objects as it is primarily an object graph manager that happens to have a persistence layer, our second choice might be realm but in our case the overhead work is not worth it so saving a .plist file to disk allows us to easily add, remove our model objects without much code and the code is more swift friendly and it’s easy to understand
 
-### Enums:-
+### **Enums**:-
 
 Using enum is very pretty as I can set the cases and extend these cases with variables, I used them in
-1- Managing view states 
-2- Listing differrent categories and countries 
-3- Build Alamofire network request
+- Managing view states 
+- Listing differrent categories and countries 
+- Build Alamofire network request
 
 ## Pods
 
@@ -47,3 +47,5 @@ Using enum is very pretty as I can set the cases and extend these cases with var
 <img src="https://user-images.githubusercontent.com/44899782/147391362-dc92230f-71c4-4fcd-a3a5-03afb1b70f73.png" width="100">
 <img src="https://user-images.githubusercontent.com/44899782/147391367-6b5cbb64-4826-4b22-ac32-09421b781369.png" width="100">
 </div>
+
+## Video
