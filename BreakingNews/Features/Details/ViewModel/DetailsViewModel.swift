@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol DetailsViewModelProtocol {
     var article: Article { get }
@@ -26,12 +27,11 @@ class DetailsViewModel: DetailsViewModelProtocol {
     
     func openArticleInSafari() {
         guard let stringURL = article.url?.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
-              let url = URL(string: stringURL) else {
-            statePresenter?.render(state: .error(ErrorHandler.invalidURL))
-            return
-        }
+              let url = URL(string: stringURL), UIApplication.shared.canOpenURL(url) else {
+                  statePresenter?.render(state: .error(ErrorHandler.invalidURL))
+                  return
+              }
         articleURL = url
         statePresenter?.render(state: .populated)
     }
-    
 }
