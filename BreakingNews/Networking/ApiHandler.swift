@@ -50,7 +50,7 @@ private extension ApiHandler {
         return requestData
     }
 
-    func handleResponse<T: Decodable> (response: AFDataResponse<Any>, mappingClass: T.Type) -> Swift.Result<T, Error> {
+    func handleResponse<T: Decodable> (response: AFDataResponse<Any>, mappingClass: T.Type) -> Result<T, Error> {
         switch response.result {
         case .success:
             guard let jsonResponse = response.data else {

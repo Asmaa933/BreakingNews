@@ -11,7 +11,7 @@ class HomeViewController: UIViewController {
     
     //MARK: - Outlets
     
-    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBar: CustomSearchBar!
     @IBOutlet private weak var newsTableView: UITableView!
     
     private var viewModel: HomeViewModelProtocol
@@ -40,6 +40,7 @@ fileprivate extension HomeViewController {
     
     func setupView() {
         setupNewsTableView()
+        setupSearchBar()
     }
     
     func setupNewsTableView() {
@@ -57,6 +58,13 @@ fileprivate extension HomeViewController {
     
     func removeIndicators() {
         newsTableView.removeActivityIndicatorFromFooter(footerActivityIndicator)
+    }
+    
+    func setupSearchBar() {
+        searchBar.textDidChange = {[weak self] text in
+            guard let self = self else { return}
+            self.viewModel.searchForArticle(by: text)
+        }
     }
 }
 

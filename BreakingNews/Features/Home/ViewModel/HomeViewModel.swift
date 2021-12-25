@@ -7,12 +7,18 @@
 
 import Foundation
 
+enum HomeState {
+    case searching(text: String)
+    case notSearching
+}
+
 protocol HomeViewModelProtocol {
     var statePresenter: StatePresentable? { get set }
     func fetchArticles()
     func getArticlesCount() -> Int
     func getArticle(at index: Int) -> Article
     func loadMoreArticles()
+    func searchForArticle(by text: String)
 }
 
 class HomeViewModel: HomeViewModelProtocol {
@@ -22,10 +28,13 @@ class HomeViewModel: HomeViewModelProtocol {
     private var articles = [Article]()
     private var pageNumber: Int = 1
     private var hasMoreItems: Bool = true
+    private var pendingRequestWorkItem: DispatchWorkItem?
+    private var currentState: HomeState = .notSearching
 
+    
     var statePresenter: StatePresentable?
-
-
+    
+    
     init(userFavorite: UserFavorite, dataSource: HomeDataProviderUseCase) {
         self.userFavorite = userFavorite
         self.dataSource = dataSource
@@ -37,7 +46,12 @@ class HomeViewModel: HomeViewModelProtocol {
     }
     
     func loadMoreArticles() {
-        loadData(isLoadMore: true)
+        switch currentState {
+        case .searching(text: let text):
+            loadData(searchText: text, isLoadMore: true)
+        case .notSearching:
+            loadData(isLoadMore: true)
+        }
     }
     
     func getArticlesCount() -> Int {
@@ -49,7 +63,25 @@ class HomeViewModel: HomeViewModelProtocol {
     }
     
     func getArticle(at index: Int) -> Article { articles[index] }
-
+    
+    func searchForArticle(by text: String) {
+        pageNumber = 1
+        if text.isEmpty {
+            self.currentState = .notSearching
+            loadData(isLoadMore: false)
+        } else {
+            pendingRequestWorkItem?.cancel()
+            let requestWorkItem = DispatchWorkItem { [weak self] in
+                guard let self = self else { return }
+                self.currentState = .searching(text: text)
+                self.loadData(searchText: text, isLoadMore: false)
+            }
+            pendingRequestWorkItem = requestWorkItem
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250),
+                                          execute: requestWorkItem)
+        }
+        
+    }
 }
 
 private extension HomeViewModel {
@@ -60,6 +92,7 @@ private extension HomeViewModel {
             statePresenter?.render(state: .loadingMore)
         } else {
             statePresenter?.render(state: .loading)
+            articles.removeAll()
         }
         let requestParameters = HeadlineArticleParameters(country: userFavorite.countryISO,
                                                           category: userFavorite.category,
@@ -70,7 +103,7 @@ private extension HomeViewModel {
             self.handleDataLoading(result: result)
         }
     }
-
+    
     func handleDataLoading(result: ArticleResult) {
         switch result {
         case .success(let value):
@@ -80,14 +113,14 @@ private extension HomeViewModel {
             statePresenter?.render(state: .error(error.localizedDescription))
         }
     }
-
+    
     func setData(items: [Article]) {
         self.articles.append(contentsOf: items)
         statePresenter?.render(state: .populated)
     }
     
     func checkHasMoreItems(totalResultCount: Int) {
-        if articles.count < totalResultCount {
+        if articles.count < totalResultCount && articles.count < 100 {
             pageNumber += 1
         } else {
             hasMoreItems = false
