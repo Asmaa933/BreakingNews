@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class DetailsViewController: UIViewController {
     
@@ -37,6 +38,7 @@ class DetailsViewController: UIViewController {
     }
     
     @IBAction private func openArticleAction(_ sender: BottomButton) {
+        viewModel.openArticleInSafari()
     }
 }
 
@@ -57,6 +59,11 @@ fileprivate extension DetailsViewController {
         }
     }
     
+    func openSafariView() {
+        guard let url = viewModel.articleURL else { return }
+        let safari = SFSafariViewController(url: url)
+        present(safari, animated: true)
+    }
 }
 
 extension DetailsViewController: StatePresentable {
