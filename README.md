@@ -4,22 +4,22 @@
 
 ### **Structure**:-
 
-I used MVVM structure with use cases to cleanly achieve separation of concern for the user interface from the application logic. By using this architecture it helped in
+I used the MVVM structure with use cases to cleanly achieve separation of concern for the user interface from the application logic. By using this architecture it helped in
 - Independent of UI: The UI can change easily, without changing the rest of the system as we can substitute the table view with a collection view and we will not have to touch our logic
-- Independent of the database and network: I can easily change the them without break business rules.
+- Independent of the database and network: I can easily change them without breaking business rules.
 - Testable: The business rules can be tested without the UI, database, web server, or any other external element.
 
 #### Data Flow
-1. View(UI) calls method from ViewModel.
+1. View(UI) calls a method from ViewModel.
 2. ViewModel executes Use Case.
-3. Use Case call network api and return the articles to viewModel.
+3. Use Case call network API and return the articles to viewModel.
 5. Information flows back to the View(UI) where we display the list of items.
 
 ### **Caching**:- 
 1. I used **UserDefauls** to cache simple configuration(user favorites and date of last caching)
-2. I used **docouments directory** to cache articles and refresh it every 15 minutes:
+2. I used **documents directory** to cache articles and refresh it every 15 minutes:
 #### When thinking about persistence in iOS apps:
-The first choice might be Core Data but Core Data is best used when we have a lot of relationships between our objects as it is primarily an object graph manager that happens to have a persistence layer, our second choice might be realm but in our case the overhead work is not worth it so saving a .plist file to disk allows us to easily add, remove our model objects without much code and the code is more swift friendly and it’s easy to understand
+The first choice might be Core Data but Core Data is best used when we have a lot of relationships between our objects as it is primarily an object graph manager that happens to have a persistence layer, our second choice might be realm but in our case, the overhead work is not worth it so saving a .plist file to disk allows us to easily add, remove our model objects without much code and the code is more swift friendly and it’s easy to understand
 
 ### **Enums**:-
 
@@ -30,7 +30,7 @@ Using enum is very pretty as I can set the cases and extend these cases with var
 
 ## Pods
 
-- **Alamofire**: HTTP networking library to simplifies common  REST services.
+- **Alamofire**: HTTP networking library to simplify common REST services.
 - **SDWebImage**: Async image downloader with cache support.
 - **DropDown**:  Design drop down.
 
