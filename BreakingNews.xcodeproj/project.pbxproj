@@ -353,11 +353,11 @@
 		99B8496C2775419F00D43BB0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				99C9EDDD2776A53600C96A31 /* Constants */,
-				993322112775EC2200896952 /* SharedProtocols */,
+				99B849922775572300D43BB0 /* CustomUI */,
 				993322062775E34800896952 /* Managers */,
 				993321FD277569F700896952 /* Extensions */,
-				99B849922775572300D43BB0 /* CustomUI */,
+				99C9EDDD2776A53600C96A31 /* Constants */,
+				993322112775EC2200896952 /* SharedProtocols */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -452,7 +452,7 @@
 				998854042775FA1C00D493D2 /* Views */,
 				993321FA277566A300896952 /* BottomButton */,
 				99B849932775573800D43BB0 /* CustomDropDown */,
-				99C9EDD9277691FD00C96A31 /* CustomSearchBar.swift */,
+				99C9EDE0277722C100C96A31 /* CustomSearchBar */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -523,6 +523,14 @@
 				99C9EDDE2776A54400C96A31 /* ErrorHandler.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		99C9EDE0277722C100C96A31 /* CustomSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				99C9EDD9277691FD00C96A31 /* CustomSearchBar.swift */,
+			);
+			path = CustomSearchBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
