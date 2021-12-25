@@ -25,7 +25,8 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func openArticleInSafari() {
-        guard let stringURL = article.url, let url = URL(string: stringURL) else {
+        guard let stringURL = article.url?.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
+              let url = URL(string: stringURL) else {
             statePresenter?.render(state: .error(ErrorHandler.invalidURL))
             return
         }
