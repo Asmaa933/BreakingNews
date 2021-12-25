@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.statePresenter = self
-        viewModel.fetchArticles()
+        viewModel.fetchArticles(isRefresh: false)
         setupView()
     }
 }
@@ -76,6 +76,13 @@ fileprivate extension HomeViewController {
     func dismissLoading() {
         newsTableView.isUserInteractionEnabled = true
         activityIndicator.stopAnimating()
+    }
+    
+    func scrollToTop() {
+        removeIndicators()
+        if viewModel.getArticlesCount() != 0 {
+            newsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
 }
 
@@ -121,6 +128,8 @@ extension HomeViewController: StatePresentable {
         case .populated:
             reloadData()
             newsTableView.restore()
+        case .refresh:
+            scrollToTop()
         }
     }
     

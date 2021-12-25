@@ -10,11 +10,12 @@ import Foundation
 enum HomeState: Equatable {
     case searching(text: String)
     case notSearching
+    
 }
 
 protocol HomeViewModelProtocol {
     var statePresenter: StatePresentable? { get set }
-    func fetchArticles()
+    func fetchArticles(isRefresh: Bool)
     func getArticlesCount() -> Int
     func getArticle(at index: Int) -> Article
     func loadMoreArticles()
@@ -31,18 +32,26 @@ class HomeViewModel: HomeViewModelProtocol {
     private var hasMoreItems: Bool = true
     private var pendingRequestWorkItem: DispatchWorkItem?
     private var currentState: HomeState = .notSearching
-    
+    private weak var timer: Timer?
     
     var statePresenter: StatePresentable?
     
     init(userFavorite: UserFavorite, dataSource: HomeDataProviderUseCase) {
         self.userFavorite = userFavorite
         self.dataSource = dataSource
+        startTimer()
     }
     
-    func fetchArticles() {
+    deinit {
+        stopTimer()
+    }
+    
+    func fetchArticles(isRefresh: Bool) {
         pageNumber = 1
-        if !loadDataFromCaching() {
+        hasMoreItems = true
+        if isRefresh {
+            loadData(isLoadMore: false, isRefresh: true)
+        } else if !loadDataFromCaching() {
             loadData(isLoadMore: false)
         }
     }
@@ -72,8 +81,7 @@ class HomeViewModel: HomeViewModelProtocol {
         hasMoreItems = true
         if text.isEmpty {
             searchedArticles.removeAll()
-            self.currentState = .notSearching
-            pageNumber = articles.count / 20 + 1
+            loadDataFromCaching()
             statePresenter?.render(state: .populated)
         } else {
             pageNumber = 1
@@ -93,14 +101,14 @@ class HomeViewModel: HomeViewModelProtocol {
 fileprivate extension HomeViewModel {
     
     @discardableResult
-    func loadDataFromCaching() -> Bool {
+    func loadDataFromCaching(state: State = .populated) -> Bool {
         articles = CachingManager.shared.loadArticles()
         pageNumber = articles.count / 20 + 1
-        statePresenter?.render(state: .populated)
+        statePresenter?.render(state: state)
         return !articles.isEmpty
     }
     
-    func loadData(searchText: String? = nil, isLoadMore: Bool) {
+    func loadData(searchText: String? = nil, isLoadMore: Bool, isRefresh: Bool = false) {
         guard hasMoreItems else { return }
         if isLoadMore {
             statePresenter?.render(state: .loadingMore)
@@ -113,14 +121,14 @@ fileprivate extension HomeViewModel {
                                                           query: searchText)
         dataSource.loadData(requestParameters: requestParameters) {[weak self] result in
             guard let self = self else { return }
-            self.handleDataLoading(result: result)
+            self.handleDataLoading(result: result, isRefresh: isRefresh)
         }
     }
     
-    func handleDataLoading(result: ArticleResult) {
+    func handleDataLoading(result: ArticleResult, isRefresh: Bool) {
         switch result {
         case .success(let value):
-            setData(items: value.articles ?? [])
+            setData(items: value.articles ?? [], isRefresh: isRefresh)
             checkHasMoreItems(totalResultCount: value.totalResults ?? 0,
                               isNewArrayNotEmpty: !(value.articles?.isEmpty ?? false))
         case .failure(let error):
@@ -128,18 +136,35 @@ fileprivate extension HomeViewModel {
         }
     }
     
-    func setData(items: [Article]) {
+    func setData(items: [Article], isRefresh: Bool) {
+        if isRefresh {
+            handleRefreshArticles(items: items)
+            return
+        } else {
+            setArticles(items)
+        }
+    }
+    
+    func setArticles(_ items: [Article]) {
         switch currentState {
         case .searching:
             self.searchedArticles.append(contentsOf: items)
             statePresenter?.render(state: .populated)
         case .notSearching:
-            guard !items.isEmpty else { return }
+            guard !items.isEmpty else {
+                statePresenter?.render(state: .populated)
+                return
+            }
             var newArticles = self.articles
             newArticles.append(contentsOf: items)
             CachingManager.shared.saveArticles(newArticles)
             loadDataFromCaching()
         }
+    }
+    
+    func handleRefreshArticles(items: [Article]) {
+        CachingManager.shared.saveArticles(items)
+        loadDataFromCaching(state: .refresh)
     }
     
     func checkHasMoreItems(totalResultCount: Int, isNewArrayNotEmpty: Bool) {
@@ -148,5 +173,21 @@ fileprivate extension HomeViewModel {
         } else {
             hasMoreItems = false
         }
+    }
+}
+
+
+fileprivate extension HomeViewModel {
+    
+    func startTimer() {
+        stopTimer()
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: {[weak self] _ in
+            guard let self = self else { return }
+            self.fetchArticles(isRefresh: true)
+        })
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
     }
 }
