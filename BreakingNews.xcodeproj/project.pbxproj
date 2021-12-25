@@ -49,6 +49,8 @@
 		99C9EDDA277691FD00C96A31 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDD9277691FD00C96A31 /* CustomSearchBar.swift */; };
 		99C9EDDC2776A05400C96A31 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDDB2776A05400C96A31 /* Errors.swift */; };
 		99C9EDDF2776A54400C96A31 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDDE2776A54400C96A31 /* ErrorHandler.swift */; };
+		99C9EDE2277740B700C96A31 /* CachingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDE1277740B700C96A31 /* CachingManager.swift */; };
+		99C9EDE427776CF200C96A31 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDE327776CF200C96A31 /* Date+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +121,8 @@
 		99C9EDD9277691FD00C96A31 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		99C9EDDB2776A05400C96A31 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		99C9EDDE2776A54400C96A31 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		99C9EDE1277740B700C96A31 /* CachingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingManager.swift; sourceTree = "<group>"; };
+		99C9EDE327776CF200C96A31 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		9C93357962E5DB6DCAE84C46 /* Pods-BreakingNews-BreakingNewsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingNews-BreakingNewsUITests.release.xcconfig"; path = "Target Support Files/Pods-BreakingNews-BreakingNewsUITests/Pods-BreakingNews-BreakingNewsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A36BB25CBEF7177A0FFF6990 /* Pods_BreakingNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakingNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97383FE372FA8778B54C5CC /* Pods_BreakingNewsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakingNewsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +196,7 @@
 				993322162776066E00896952 /* UITableView+Ext.swift */,
 				99C9EDCF277624E200C96A31 /* Encodable+Ext.swift */,
 				99C9EDD5277679E000C96A31 /* UIImageView+Ext.swift */,
+				99C9EDE327776CF200C96A31 /* Date+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -216,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				9933220E2775EB7D00896952 /* UserDefaultsManager.swift */,
+				99C9EDE1277740B700C96A31 /* CachingManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -253,7 +259,6 @@
 		9984B3C427753D1200EE0888 /* BreakingNews */ = {
 			isa = PBXGroup;
 			children = (
-				99B849662775400800D43BB0 /* Delegates */,
 				99BDE29A277618EE000140B3 /* Networking */,
 				99B8496B2775417C00D43BB0 /* Features */,
 				99B8496C2775419F00D43BB0 /* Helpers */,
@@ -309,6 +314,7 @@
 		99B849672775401A00D43BB0 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				99B849662775400800D43BB0 /* Delegates */,
 				99B849682775402A00D43BB0 /* Assets */,
 				99B849692775403700D43BB0 /* LaunchScreen */,
 				99B8496A2775404300D43BB0 /* Plist */,
@@ -780,6 +786,7 @@
 				99B849842775464000D43BB0 /* HomeViewModel.swift in Sources */,
 				99B849782775453800D43BB0 /* OnBoardingViewController.swift in Sources */,
 				99B8498D277547FF00D43BB0 /* DetailsViewModel.swift in Sources */,
+				99C9EDE427776CF200C96A31 /* Date+Ext.swift in Sources */,
 				99BDE29E2776199D000140B3 /* ApiHandler.swift in Sources */,
 				993321FF27756A1700896952 /* UIColor+Ext.swift in Sources */,
 				99C9EDD227762B8900C96A31 /* HomeDataProvider.swift in Sources */,
@@ -797,6 +804,7 @@
 				99C9EDDF2776A54400C96A31 /* ErrorHandler.swift in Sources */,
 				9933220F2775EB7D00896952 /* UserDefaultsManager.swift in Sources */,
 				99C9EDD6277679E000C96A31 /* UIImageView+Ext.swift in Sources */,
+				99C9EDE2277740B700C96A31 /* CachingManager.swift in Sources */,
 				99B849952775574C00D43BB0 /* CustomDropDown.swift in Sources */,
 				9984B3C827753D1200EE0888 /* SceneDelegate.swift in Sources */,
 				993322152775F2CC00896952 /* UIViewController+Ext.swift in Sources */,

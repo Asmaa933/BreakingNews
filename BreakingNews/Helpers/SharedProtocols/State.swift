@@ -13,6 +13,7 @@ enum State {
     case error(Error)
     case empty
     case populated
+    case refresh
 }
 
 enum EmptyState {

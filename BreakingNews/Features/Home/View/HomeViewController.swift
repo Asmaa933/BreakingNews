@@ -27,12 +27,22 @@ class HomeViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.checkLastCacheDate()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.stopTimer()
+    }
+    
     //MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.statePresenter = self
-        viewModel.fetchArticles()
+        viewModel.fetchArticles(isRefresh: false)
         setupView()
     }
 }
@@ -48,6 +58,7 @@ fileprivate extension HomeViewController {
         newsTableView.delegate = self
         newsTableView.dataSource = self
         newsTableView.registerCellNib(cellClass: NewsTableViewCell.self)
+        newsTableView.keyboardDismissMode = .onDrag
     }
     
     func reloadData() {
@@ -77,9 +88,18 @@ fileprivate extension HomeViewController {
         newsTableView.isUserInteractionEnabled = true
         activityIndicator.stopAnimating()
     }
+    
+    func scrollToTop() {
+        removeIndicators()
+        newsTableView.reloadData()
+        if viewModel.getArticlesCount() != 0 {
+            newsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
+    }
 }
 
 extension HomeViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == viewModel.getArticlesCount() - 1 {
             viewModel.loadMoreArticles()
@@ -119,8 +139,10 @@ extension HomeViewController: StatePresentable {
         case .empty:
             setEmptyView()
         case .populated:
-            reloadData()
             newsTableView.restore()
+            reloadData()
+        case .refresh:
+            scrollToTop()
         }
     }
     
