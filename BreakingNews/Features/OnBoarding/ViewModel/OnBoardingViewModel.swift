@@ -43,7 +43,8 @@ class OnBoardingViewModel: OnBoardingViewModelProtocol {
               }
         
         let userFavorite = UserFavorite(countryISO: countries[selectedCountryIndex].isoCode,
-                                        category: categories[selectedCategoryIndex].rawValue)
+                                        category: categories[selectedCategoryIndex].rawValue,
+                                        country: countries[selectedCountryIndex].rawValue)
         UserDefaultsManager.saveUserFavorite(userFavorite)
         self.userFavorite = userFavorite
         statePresenter?.render(state: .populated)

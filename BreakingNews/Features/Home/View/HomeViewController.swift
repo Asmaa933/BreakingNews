@@ -10,7 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     //MARK: - Outlets
-    
+    @IBOutlet weak var newsLabel: UILabel!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var searchBar: CustomSearchBar!
     @IBOutlet private weak var newsTableView: UITableView!
@@ -52,6 +52,7 @@ fileprivate extension HomeViewController {
     func setupView() {
         setupNewsTableView()
         setupSearchBar()
+        newsLabel.text = viewModel.getTitle()
     }
     
     func setupNewsTableView() {

@@ -21,6 +21,7 @@ protocol HomeViewModelProtocol {
     func searchForArticle(by text: String)
     func checkLastCacheDate()
     func stopTimer()
+    func getTitle() -> String
 }
 
 class HomeViewModel: HomeViewModelProtocol {
@@ -95,6 +96,10 @@ class HomeViewModel: HomeViewModelProtocol {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250),
                                           execute: requestWorkItem)
         }
+    }
+    
+    func getTitle() -> String {
+        userFavorite.category.capitalized + " news in " + userFavorite.country
     }
 }
 

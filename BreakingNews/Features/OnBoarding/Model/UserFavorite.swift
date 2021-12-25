@@ -10,5 +10,6 @@ import Foundation
 struct UserFavorite: Codable {
     let countryISO: String
     let category: String
+    let country: String
 }
 
