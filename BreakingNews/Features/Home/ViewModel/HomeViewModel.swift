@@ -66,6 +66,7 @@ class HomeViewModel: HomeViewModelProtocol {
     
     func searchForArticle(by text: String) {
         pageNumber = 1
+        hasMoreItems = true
         if text.isEmpty {
             self.currentState = .notSearching
             loadData(isLoadMore: false)
