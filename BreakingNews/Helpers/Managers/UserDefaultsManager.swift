@@ -9,6 +9,7 @@ import Foundation
 
 enum UserDefaultsKey: String {
     case UserFavorite = "favorite"
+    case lastCacheDate = "dateCache"
 }
 
 class UserDefaultsManager {
@@ -24,5 +25,13 @@ class UserDefaultsManager {
         guard let favoriteData = UserDefaults.standard.object(forKey: UserDefaultsKey.UserFavorite.rawValue) as? Data else { return nil }
         guard let favoriteObject = try? JSONDecoder().decode(UserFavorite.self, from: favoriteData) else { return nil }
         return favoriteObject
+    }
+    
+    class func saveLastCacheDate() {
+        UserDefaults.standard.set(Date(), forKey: UserDefaultsKey.lastCacheDate.rawValue)
+    }
+    
+    class func getLastCacheDate() -> Date? {
+        UserDefaults.standard.object(forKey: UserDefaultsKey.lastCacheDate.rawValue) as? Date
     }
 }

@@ -10,7 +10,6 @@ import Foundation
 enum HomeState: Equatable {
     case searching(text: String)
     case notSearching
-    
 }
 
 protocol HomeViewModelProtocol {
@@ -20,6 +19,8 @@ protocol HomeViewModelProtocol {
     func getArticle(at index: Int) -> Article
     func loadMoreArticles()
     func searchForArticle(by text: String)
+    func checkLastCacheDate()
+    func stopTimer()
 }
 
 class HomeViewModel: HomeViewModelProtocol {
@@ -39,7 +40,6 @@ class HomeViewModel: HomeViewModelProtocol {
     init(userFavorite: UserFavorite, dataSource: HomeDataProviderUseCase) {
         self.userFavorite = userFavorite
         self.dataSource = dataSource
-        startTimer()
     }
     
     deinit {
@@ -79,10 +79,10 @@ class HomeViewModel: HomeViewModelProtocol {
     
     func searchForArticle(by text: String) {
         hasMoreItems = true
+        searchedArticles.removeAll()
         if text.isEmpty {
-            searchedArticles.removeAll()
+            currentState = .notSearching
             loadDataFromCaching()
-            statePresenter?.render(state: .populated)
         } else {
             pageNumber = 1
             pendingRequestWorkItem?.cancel()
@@ -158,12 +158,14 @@ fileprivate extension HomeViewModel {
             var newArticles = self.articles
             newArticles.append(contentsOf: items)
             CachingManager.shared.saveArticles(newArticles)
+            startTimer()
             loadDataFromCaching()
         }
     }
     
     func handleRefreshArticles(items: [Article]) {
         CachingManager.shared.saveArticles(items)
+        startTimer()
         loadDataFromCaching(state: .refresh)
     }
     
@@ -176,12 +178,11 @@ fileprivate extension HomeViewModel {
     }
 }
 
-
-fileprivate extension HomeViewModel {
+extension HomeViewModel {
     
-    func startTimer() {
+   private func startTimer() {
         stopTimer()
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: {[weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 60 * 15, repeats: true, block: {[weak self] _ in
             guard let self = self else { return }
             self.fetchArticles(isRefresh: true)
         })
@@ -189,5 +190,13 @@ fileprivate extension HomeViewModel {
     
     func stopTimer() {
         timer?.invalidate()
+    }
+    
+    func checkLastCacheDate() {
+        guard let lastCache = UserDefaultsManager.getLastCacheDate() else { return }
+        let difference = lastCache.getDifferenceInMinutes()
+        if difference > 15 {
+            self.fetchArticles(isRefresh: true)
+        }
     }
 }

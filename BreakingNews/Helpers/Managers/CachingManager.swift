@@ -27,6 +27,7 @@ class CachingManager {
             let encoder = PropertyListEncoder()
             let data = try encoder.encode(articles)
             try data.write(to: itemArchiveURL, options: [.atomic])
+            UserDefaultsManager.saveLastCacheDate()
             isSaved = true
             debugPrint("Saved all of the articles")
         } catch (let encodingError) {
