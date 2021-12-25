@@ -73,6 +73,7 @@ class DetailsViewModelTests: XCTestCase {
         sut.openArticleInSafari()
         XCTAssertTrue(fakeView.openSafari)
         XCTAssertFalse(fakeView.errorMessage == ErrorHandler.invalidURL.message)
+        XCTAssertFalse(fakeView.isDefaultState)
     }
 
 }

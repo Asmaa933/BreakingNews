@@ -10,13 +10,14 @@ import Foundation
 class FakeOnBoardingViewController: StatePresentable {
     
     var errorMessage = ""
+    var isDefaultState = false
     func render(state: State) {
         switch state {
         case .error(let error):
             show(error: error)
 
         default:
-            break
+            isDefaultState = true
         }
     }
     

@@ -11,6 +11,7 @@ class FakeDetailsViewController: StatePresentable {
     
     var errorMessage = ""
     var openSafari = false
+    var isDefaultState = false
     
     func render(state: State) {
         switch state {
@@ -19,7 +20,7 @@ class FakeDetailsViewController: StatePresentable {
         case  .populated:
             openSafari = true
         default:
-            break
+            isDefaultState = true
         }
     }
     

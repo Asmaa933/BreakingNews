@@ -30,5 +30,6 @@ class OnBoardingViewModelTests: XCTestCase {
         let userFavorites = UserDefaultsManager.getUserFavorite()
         XCTAssertNil(userFavorites)
         XCTAssertEqual(fakeView.errorMessage, ErrorHandler.selectDropDown.message)
+        XCTAssertFalse(fakeView.isDefaultState)
     }
 }
