@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HomeState {
+enum HomeState: Equatable {
     case searching(text: String)
     case notSearching
 }
@@ -26,6 +26,7 @@ class HomeViewModel: HomeViewModelProtocol {
     private let userFavorite: UserFavorite
     private let dataSource: HomeDataProviderUseCase
     private var articles = [Article]()
+    private var searchedArticles = [Article]()
     private var pageNumber: Int = 1
     private var hasMoreItems: Bool = true
     private var pendingRequestWorkItem: DispatchWorkItem?
@@ -33,7 +34,6 @@ class HomeViewModel: HomeViewModelProtocol {
 
     
     var statePresenter: StatePresentable?
-    
     
     init(userFavorite: UserFavorite, dataSource: HomeDataProviderUseCase) {
         self.userFavorite = userFavorite
@@ -55,14 +55,16 @@ class HomeViewModel: HomeViewModelProtocol {
     }
     
     func getArticlesCount() -> Int {
-        let count = articles.count
+        let count = currentState == .notSearching ? articles.count : searchedArticles.count
         if count == 0 {
             statePresenter?.render(state: .empty)
         }
         return count
     }
     
-    func getArticle(at index: Int) -> Article { articles[index] }
+    func getArticle(at index: Int) -> Article {
+        currentState == .notSearching ? articles[index] : searchedArticles[index]
+    }
     
     func searchForArticle(by text: String) {
         pageNumber = 1
@@ -81,7 +83,6 @@ class HomeViewModel: HomeViewModelProtocol {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250),
                                           execute: requestWorkItem)
         }
-        
     }
 }
 
@@ -109,19 +110,25 @@ private extension HomeViewModel {
         switch result {
         case .success(let value):
             setData(items: value.articles ?? [])
-            checkHasMoreItems(totalResultCount: value.totalResults ?? 0)
+            checkHasMoreItems(totalResultCount: value.totalResults ?? 0,
+                              isNewArrayNotEmpty: !(value.articles?.isEmpty ?? false))
         case .failure(let error):
             statePresenter?.render(state: .error(error))
         }
     }
     
     func setData(items: [Article]) {
-        self.articles.append(contentsOf: items)
+        switch currentState {
+        case .searching:
+            self.searchedArticles.append(contentsOf: items)
+        case .notSearching:
+            self.articles.append(contentsOf: items)
+        }
         statePresenter?.render(state: .populated)
     }
     
-    func checkHasMoreItems(totalResultCount: Int) {
-        if articles.count < totalResultCount && articles.count < 100 {
+    func checkHasMoreItems(totalResultCount: Int, isNewArrayNotEmpty: Bool) {
+        if articles.count < totalResultCount && isNewArrayNotEmpty {
             pageNumber += 1
         } else {
             hasMoreItems = false
