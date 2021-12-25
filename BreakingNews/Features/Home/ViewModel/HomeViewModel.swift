@@ -81,12 +81,12 @@ class HomeViewModel: HomeViewModelProtocol {
     func searchForArticle(by text: String) {
         hasMoreItems = true
         searchedArticles.removeAll()
+        pendingRequestWorkItem?.cancel()
         if text.isEmpty {
             currentState = .notSearching
             loadDataFromCaching()
         } else {
             pageNumber = 1
-            pendingRequestWorkItem?.cancel()
             let requestWorkItem = DispatchWorkItem { [weak self] in
                 guard let self = self else { return }
                 self.currentState = .searching(text: text)

@@ -10,7 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     //MARK: - Outlets
-    @IBOutlet weak var newsLabel: UILabel!
+    @IBOutlet private weak var newsLabel: UILabel!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var searchBar: CustomSearchBar!
     @IBOutlet private weak var newsTableView: UITableView!
@@ -35,6 +35,7 @@ class HomeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.stopTimer()
+        dismissKeyBoard()
     }
     
     //MARK: - View LifeCycle
@@ -52,6 +53,7 @@ fileprivate extension HomeViewController {
     func setupView() {
         setupNewsTableView()
         setupSearchBar()
+        handleTapOnView()
         newsLabel.text = viewModel.getTitle()
     }
     
@@ -97,6 +99,17 @@ fileprivate extension HomeViewController {
             newsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
     }
+    
+    func handleTapOnView() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyBoard() {
+        view.endEditing(true)
+    }
+    
 }
 
 extension HomeViewController: UITableViewDelegate {
