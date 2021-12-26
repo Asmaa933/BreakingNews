@@ -10,7 +10,7 @@ import Foundation
 extension Date {
     func getDifferenceInMinutes() -> Int {
         let currentDate = Date()
-        let component: Set<Calendar.Component> = [.day, .hour, .minute, .second]
+        let component: Set<Calendar.Component> = [.minute]
         let difference = Calendar.current.dateComponents(component, from: self, to: currentDate)
         return difference.minute ?? 0
     }
