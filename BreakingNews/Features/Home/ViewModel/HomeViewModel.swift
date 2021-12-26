@@ -33,7 +33,7 @@ class HomeViewModel: HomeViewModelProtocol {
     private var pageNumber: Int = 1
     private var hasMoreItems: Bool = true
     private var pendingRequestWorkItem: DispatchWorkItem?
-    private var currentState: HomeState = .notSearching
+    private(set) var currentState: HomeState = .notSearching
     private weak var timer: Timer?
     
     var statePresenter: StatePresentable?

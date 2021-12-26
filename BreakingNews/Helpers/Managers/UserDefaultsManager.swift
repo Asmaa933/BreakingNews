@@ -27,8 +27,8 @@ class UserDefaultsManager {
         return favoriteObject
     }
     
-    class func saveLastCacheDate() {
-        UserDefaults.standard.set(Date(), forKey: UserDefaultsKey.lastCacheDate.rawValue)
+    class func saveLastCacheDate(date: Date = Date()) {
+        UserDefaults.standard.set(date, forKey: UserDefaultsKey.lastCacheDate.rawValue)
     }
     
     class func getLastCacheDate() -> Date? {
