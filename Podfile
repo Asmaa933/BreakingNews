@@ -15,8 +15,4 @@ target 'BreakingNews' do
     # Pods for testing
   end
 
-  target 'BreakingNewsUITests' do
-    # Pods for testing
-  end
-
 end
