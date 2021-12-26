@@ -19,7 +19,7 @@ class FakeHomeViewController: StatePresentable {
     func render(state: State) {
         switch state {
         case .loading:
-            centerLoadingIndicator = true
+            dataLoaded()
         case .loadingMore:
             footerLoadingIndicator = true
         case .error(let error):
@@ -43,6 +43,7 @@ class FakeHomeViewController: StatePresentable {
     }
     
     func dataLoaded() {
+        centerLoadingIndicator = true
         numberOfTimesRefreshed += 1
     }
     

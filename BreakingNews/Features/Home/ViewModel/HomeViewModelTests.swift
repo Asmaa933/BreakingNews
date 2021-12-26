@@ -18,6 +18,7 @@ class HomeViewModelTests: XCTestCase {
     
     override class func tearDown() {
         UserDefaults.standard.removeObject(forKey: UserDefaultsKey.UserFavorite.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKey.lastCacheDate.rawValue)
     }
     
     func testFetchDataFromAPI() {
@@ -108,14 +109,15 @@ class HomeViewModelTests: XCTestCase {
         XCTAssertFalse(viewController.isRefresh)
         XCTAssertFalse(viewController.isEmpty)
         XCTAssertTrue(viewController.errorMessage.isEmpty)
-
+        XCTAssertTrue(viewController.numberOfTimesRefreshed == 2)
+        
     }
     
     func testGetTitle() {
         let homeProvider = FakeHomeDataSource(shouldReturnError: false, error: nil)
         let sut = HomeViewModel(userFavorite: userFavorite, dataSource: homeProvider)
-      let title = sut.getTitle()
-    XCTAssertEqual(title, "Technology news in America")
+        let title = sut.getTitle()
+        XCTAssertEqual(title, "Technology news in America")
     }
     
     func testRefreshWhenLastCachingWasMore15Minutes() {
@@ -144,4 +146,54 @@ class HomeViewModelTests: XCTestCase {
         XCTAssertFalse(viewController.isRefresh)
     }
     
+    func testSearchForText() {
+        let expectationObject = expectation(description: "Testing Search")
+        CachingManager.shared.saveArticles([])
+        let homeProvider = FakeHomeDataSource(shouldReturnError: false, error: nil)
+        let sut = HomeViewModel(userFavorite: userFavorite, dataSource: homeProvider)
+        let viewController = FakeHomeViewController()
+        sut.searchForArticle(by: "xxx")
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+            expectationObject.fulfill()
+            XCTAssertTrue(sut.currentState == .searching(text: "xxx"))
+            XCTAssertTrue(sut.getArticlesCount() == 3)
+            XCTAssertTrue(viewController.errorMessage.isEmpty)
+        }
+        waitForExpectations(timeout: 5)
+    }
+    
+    func testChangeSearchTextBeforeTime() {
+        let expectationObject = expectation(description: "Test Search For Empty String")
+        CachingManager.shared.saveArticles([])
+        let homeProvider = FakeHomeDataSource(shouldReturnError: false, error: nil)
+        let sut = HomeViewModel(userFavorite: userFavorite, dataSource: homeProvider)
+        let viewController = FakeHomeViewController()
+        sut.searchForArticle(by: "xxx")
+        sut.searchForArticle(by: "yyy")
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+            expectationObject.fulfill()
+            XCTAssertTrue(sut.currentState == .searching(text: "yyy"))
+            XCTAssertTrue(sut.getArticlesCount() == 3)
+            XCTAssertTrue(viewController.errorMessage.isEmpty)
+        }
+        waitForExpectations(timeout: 5)
+    }
+    
+    
+    func testChangeSearchEmptyString() {
+        let expectationObject = expectation(description: "Test Search For Empty String")
+        CachingManager.shared.saveArticles([FakeArticle().article])
+        let homeProvider = FakeHomeDataSource(shouldReturnError: false, error: nil)
+        let sut = HomeViewModel(userFavorite: userFavorite, dataSource: homeProvider)
+        let viewController = FakeHomeViewController()
+        sut.searchForArticle(by: "xxx")
+        sut.searchForArticle(by: "")
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+            expectationObject.fulfill()
+            XCTAssertTrue(sut.currentState == .notSearching)
+            XCTAssertTrue(sut.getArticlesCount() == 1)
+            XCTAssertTrue(viewController.errorMessage.isEmpty)
+        }
+        waitForExpectations(timeout: 5)
+    }
 }
