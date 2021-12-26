@@ -6,9 +6,9 @@ target 'BreakingNews' do
   use_frameworks!
 
   # Pods for BreakingNews
-  pod 'DropDown'
-  pod 'Alamofire'
-  pod 'SDWebImage'
+  pod 'DropDown','~>2.3'
+  pod 'Alamofire', '~> 5.4'
+  pod 'SDWebImage','~>5.0'
 
   target 'BreakingNewsTests' do
     inherit! :search_paths
