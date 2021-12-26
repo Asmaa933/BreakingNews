@@ -196,4 +196,21 @@ class HomeViewModelTests: XCTestCase {
         }
         waitForExpectations(timeout: 5)
     }
+    
+    func testLoadMoreItemForSearch() {
+        let expectationObject = expectation(description: "Test Search For Empty String")
+        CachingManager.shared.saveArticles([FakeArticle().article])
+        let homeProvider = FakeHomeDataSource(shouldReturnError: false, error: nil)
+        let sut = HomeViewModel(userFavorite: userFavorite, dataSource: homeProvider)
+        let viewController = FakeHomeViewController()
+        sut.searchForArticle(by: "xxx")
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+            sut.loadMoreArticles()
+            expectationObject.fulfill()
+            XCTAssertTrue(sut.currentState == .searching(text: "xxx"))
+            XCTAssertTrue(sut.getArticlesCount() == 6)
+            XCTAssertTrue(viewController.errorMessage.isEmpty)
+        }
+        waitForExpectations(timeout: 5)
+    }
 }

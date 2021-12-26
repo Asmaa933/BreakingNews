@@ -37,6 +37,13 @@
             BlueprintName = "BreakingNews"
             ReferencedContainer = "container:BreakingNews.xcodeproj">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9984B3D727753D1500EE0888"
+            BuildableName = "BreakingNewsTests.xctest"
+            BlueprintName = "BreakingNewsTests"
+            ReferencedContainer = "container:BreakingNews.xcodeproj">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
