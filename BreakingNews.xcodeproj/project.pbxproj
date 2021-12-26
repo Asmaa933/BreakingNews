@@ -13,6 +13,9 @@
 		9929DA772777CC5C00DAE581 /* FakeOnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA762777CC5C00DAE581 /* FakeOnBoardingViewController.swift */; };
 		9929DA7B2777CEE700DAE581 /* DetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA7A2777CEE700DAE581 /* DetailsViewModelTests.swift */; };
 		9929DA7D2777D1A800DAE581 /* FakeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA7C2777D1A800DAE581 /* FakeDetailsViewController.swift */; };
+		9929DA7F2777DD7B00DAE581 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA7E2777DD7B00DAE581 /* HomeViewModelTests.swift */; };
+		9929DA812777DDA200DAE581 /* FakeHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA802777DDA200DAE581 /* FakeHomeViewController.swift */; };
+		9929DA832777DF0100DAE581 /* FakeHomeDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA822777DF0100DAE581 /* FakeHomeDataProvider.swift */; };
 		993321FC277566D800896952 /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993321FB277566D800896952 /* BottomButton.swift */; };
 		993321FF27756A1700896952 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993321FE27756A1700896952 /* UIColor+Ext.swift */; };
 		993322022775CFB400896952 /* OnBoardingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993322012775CFB400896952 /* OnBoardingConstants.swift */; };
@@ -75,6 +78,9 @@
 		9929DA762777CC5C00DAE581 /* FakeOnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeOnBoardingViewController.swift; sourceTree = "<group>"; };
 		9929DA7A2777CEE700DAE581 /* DetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModelTests.swift; sourceTree = "<group>"; };
 		9929DA7C2777D1A800DAE581 /* FakeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDetailsViewController.swift; sourceTree = "<group>"; };
+		9929DA7E2777DD7B00DAE581 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
+		9929DA802777DDA200DAE581 /* FakeHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeHomeViewController.swift; sourceTree = "<group>"; };
+		9929DA822777DF0100DAE581 /* FakeHomeDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeHomeDataProvider.swift; sourceTree = "<group>"; };
 		993321FB277566D800896952 /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
 		993321FE27756A1700896952 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		993322012775CFB400896952 /* OnBoardingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingConstants.swift; sourceTree = "<group>"; };
@@ -393,6 +399,7 @@
 			children = (
 				99B8497F2775462800D43BB0 /* HomeViewController.swift */,
 				99B849802775462800D43BB0 /* HomeViewController.xib */,
+				9929DA802777DDA200DAE581 /* FakeHomeViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -401,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				99B849832775464000D43BB0 /* HomeViewModel.swift */,
+				9929DA7E2777DD7B00DAE581 /* HomeViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -484,6 +492,7 @@
 			children = (
 				99C9EDCC2776201C00C96A31 /* Response */,
 				99C9EDD127762B8900C96A31 /* HomeDataProvider.swift */,
+				9929DA822777DF0100DAE581 /* FakeHomeDataProvider.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -710,8 +719,10 @@
 				99C9EDD0277624E200C96A31 /* Encodable+Ext.swift in Sources */,
 				99C9EDD42776317500C96A31 /* ArticleResponse.swift in Sources */,
 				9988540C2775FC6700D493D2 /* NewsTableViewCell.swift in Sources */,
+				9929DA832777DF0100DAE581 /* FakeHomeDataProvider.swift in Sources */,
 				993322132775EC2E00896952 /* State.swift in Sources */,
 				993321FC277566D800896952 /* BottomButton.swift in Sources */,
+				9929DA812777DDA200DAE581 /* FakeHomeViewController.swift in Sources */,
 				993322022775CFB400896952 /* OnBoardingConstants.swift in Sources */,
 				99C9EDDF2776A54400C96A31 /* ErrorHandler.swift in Sources */,
 				9933220F2775EB7D00896952 /* UserDefaultsManager.swift in Sources */,
@@ -735,6 +746,7 @@
 				9929DA7B2777CEE700DAE581 /* DetailsViewModelTests.swift in Sources */,
 				9984B3DD27753D1500EE0888 /* BreakingNewsTests.swift in Sources */,
 				9929DA752777C90800DAE581 /* OnBoardingViewModelTests.swift in Sources */,
+				9929DA7F2777DD7B00DAE581 /* HomeViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
