@@ -117,4 +117,31 @@ class HomeViewModelTests: XCTestCase {
       let title = sut.getTitle()
     XCTAssertEqual(title, "Technology news in America")
     }
+    
+    func testRefreshWhenLastCachingWasMore15Minutes() {
+        CachingManager.shared.saveArticles([FakeArticle().article])
+        let date = Date(timeIntervalSince1970: 1640298616)
+        UserDefaultsManager.saveLastCacheDate(date: date)
+        let homeProvider = FakeHomeDataSource(shouldReturnError: false, error: nil)
+        let sut = HomeViewModel(userFavorite: userFavorite, dataSource: homeProvider)
+        let viewController = FakeHomeViewController()
+        sut.statePresenter = viewController
+        sut.checkLastCacheDate()
+        XCTAssertTrue(sut.getArticlesCount() == 3)
+        XCTAssertTrue(viewController.isRefresh)
+    }
+    
+    func testNotRefreshWhenLastCachingWasNow(){
+        CachingManager.shared.saveArticles([FakeArticle().article])
+        UserDefaultsManager.saveLastCacheDate(date: Date())
+        let homeProvider = FakeHomeDataSource(shouldReturnError: false, error: nil)
+        let sut = HomeViewModel(userFavorite: userFavorite, dataSource: homeProvider)
+        let viewController = FakeHomeViewController()
+        sut.statePresenter = viewController
+        sut.fetchArticles(isRefresh: false)
+        sut.checkLastCacheDate()
+        XCTAssertTrue(sut.getArticlesCount() == 1)
+        XCTAssertFalse(viewController.isRefresh)
+    }
+    
 }
