@@ -52,5 +52,12 @@ Using enum is very pretty as I can set the cases and extend these cases with var
 
 https://user-images.githubusercontent.com/44899782/147393972-22a62ecf-856b-4e3a-aa64-59bd173ef655.mov
 
+## Unit Test Coverage: 43.3%
+<img src="https://user-images.githubusercontent.com/44899782/147397051-15185fb8-f8a9-4986-89f4-ca99335368db.png" width="500">
+
+
+
+
+
 
 
