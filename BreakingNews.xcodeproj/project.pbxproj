@@ -56,6 +56,7 @@
 		99C9EDDF2776A54400C96A31 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDDE2776A54400C96A31 /* ErrorHandler.swift */; };
 		99C9EDE2277740B700C96A31 /* CachingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDE1277740B700C96A31 /* CachingManager.swift */; };
 		99C9EDE427776CF200C96A31 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9EDE327776CF200C96A31 /* Date+Ext.swift */; };
+		99CE646027874797000944EB /* MockTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CE645F27874797000944EB /* MockTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,7 @@
 		99C9EDDE2776A54400C96A31 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		99C9EDE1277740B700C96A31 /* CachingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingManager.swift; sourceTree = "<group>"; };
 		99C9EDE327776CF200C96A31 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		99CE645F27874797000944EB /* MockTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimer.swift; sourceTree = "<group>"; };
 		9C93357962E5DB6DCAE84C46 /* Pods-BreakingNews-BreakingNewsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingNews-BreakingNewsUITests.release.xcconfig"; path = "Target Support Files/Pods-BreakingNews-BreakingNewsUITests/Pods-BreakingNews-BreakingNewsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A36BB25CBEF7177A0FFF6990 /* Pods_BreakingNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakingNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97383FE372FA8778B54C5CC /* Pods_BreakingNewsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakingNewsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -409,6 +411,7 @@
 			children = (
 				99B849832775464000D43BB0 /* HomeViewModel.swift */,
 				9929DA7E2777DD7B00DAE581 /* HomeViewModelTests.swift */,
+				99CE645F27874797000944EB /* MockTimer.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -718,6 +721,7 @@
 				99B8498A277547E500D43BB0 /* DetailsViewController.swift in Sources */,
 				99C9EDD0277624E200C96A31 /* Encodable+Ext.swift in Sources */,
 				99C9EDD42776317500C96A31 /* ArticleResponse.swift in Sources */,
+				99CE646027874797000944EB /* MockTimer.swift in Sources */,
 				9988540C2775FC6700D493D2 /* NewsTableViewCell.swift in Sources */,
 				9929DA832777DF0100DAE581 /* FakeHomeDataProvider.swift in Sources */,
 				993322132775EC2E00896952 /* State.swift in Sources */,

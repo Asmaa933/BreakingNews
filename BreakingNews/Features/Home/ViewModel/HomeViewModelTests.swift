@@ -133,6 +133,17 @@ class HomeViewModelTests: XCTestCase {
         XCTAssertTrue(viewController.isRefresh)
     }
     
+    func testRefreshUsingTimerMock() {
+        CachingManager.shared.saveArticles([FakeArticle().article])
+        let homeProvider = FakeHomeDataSource(shouldReturnError: false, error: nil)
+        let sut = HomeViewModel(userFavorite: userFavorite, dataSource: homeProvider, timer: MockTimer.currentTimer)
+        let viewController = FakeHomeViewController()
+        sut.statePresenter = viewController
+        MockTimer.currentTimer.fire()
+     //   XCTAssertTrue(sut.getArticlesCount() == 3)
+       // XCTAssertFalse(viewController.isRefresh)
+    }
+    
     func testNotRefreshWhenLastCachingWasNow(){
         CachingManager.shared.saveArticles([FakeArticle().article])
         UserDefaultsManager.saveLastCacheDate(date: Date())
