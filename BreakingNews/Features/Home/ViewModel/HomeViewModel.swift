@@ -34,13 +34,16 @@ class HomeViewModel: HomeViewModelProtocol {
     private var hasMoreItems: Bool = true
     private var pendingRequestWorkItem: DispatchWorkItem?
     private(set) var currentState: HomeState = .notSearching
-    private weak var timer: Timer?
+    private var timer: Timer.Type
     
     var statePresenter: StatePresentable?
     
-    init(userFavorite: UserFavorite, dataSource: HomeDataProviderUseCase) {
+    init(userFavorite: UserFavorite,
+         dataSource: HomeDataProviderUseCase,
+         timer: Timer.Type = Timer.self) {
         self.userFavorite = userFavorite
         self.dataSource = dataSource
+        self.timer = timer
     }
     
     deinit {
@@ -187,14 +190,15 @@ extension HomeViewModel {
     
    private func startTimer() {
         stopTimer()
-        timer = Timer.scheduledTimer(withTimeInterval: 60 * 15, repeats: true, block: {[weak self] _ in
+        timer.scheduledTimer(withTimeInterval: 60 * 15, repeats: true, block: {[weak self] _ in
             guard let self = self else { return }
             self.fetchArticles(isRefresh: true)
         })
     }
     
     func stopTimer() {
-        timer?.invalidate()
+//        Instance member 'invalidate' cannot be used on type 'Timer'
+//        timer.invalidate()
     }
     
     func checkLastCacheDate() {
